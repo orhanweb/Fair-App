@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "718716078560",
+    "project_id": "fair-app-test-2",
+    "storage_bucket": "fair-app-test-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718716078560:android:ac47395a337ab54c208385",
+        "android_client_info": {
+          "package_name": "com.example.fair_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718716078560-aq0aen4mcc183akjm0e0b0atvljjosh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZoBJJJ5ahcbYngiHIEodR-zOzXGTglG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718716078560-aq0aen4mcc183akjm0e0b0atvljjosh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
