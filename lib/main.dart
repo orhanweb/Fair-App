@@ -1,7 +1,5 @@
-import 'package:fair_app/auth/shared/helpers.widget.dart';
+import 'package:fair_app/auth/screens/my_auth_layout.dart';
 import 'package:flutter/material.dart';
-
-import 'auth/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,27 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Title'),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              verticalSpaceTiny,
-              verticalSpaceSmall,
-              verticalSpaceRegular,
-              verticalSpaceMedium,
-              verticalSpaceLarge,
-            ],
-          ),
-        ),
-      ),
+      home: const MyAuthLayout(),
     );
   }
 }
