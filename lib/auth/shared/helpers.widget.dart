@@ -36,7 +36,7 @@ class VerticalSpacers extends StatelessWidget {
 }
 
 Widget verticalSpaceTiny = const VerticalSpacers(boyut: 0.02);
-Widget verticalSpaceSmall = const VerticalSpacers(boyut: 0.08);
+Widget verticalSpaceSmall = const VerticalSpacers(boyut: 0.05);
 Widget verticalSpaceRegular = const VerticalSpacers(boyut: 0.15);
 Widget verticalSpaceMedium = const VerticalSpacers(boyut: 0.25);
 Widget verticalSpaceLarge = const VerticalSpacers(boyut: 0.35);

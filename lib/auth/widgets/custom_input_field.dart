@@ -1,3 +1,4 @@
+import 'package:fair_app/const.dart';
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatefulWidget {
@@ -7,6 +8,8 @@ class CustomInputField extends StatefulWidget {
     this.hint = "None",
     this.passwordfeatures = false,
     required this.prevIcon,
+    this.validator,
+    this.controller,
   }) : super(key: key);
 
   //parameters
@@ -14,6 +17,8 @@ class CustomInputField extends StatefulWidget {
   final double width;
   final bool passwordfeatures;
   final Icon prevIcon;
+  final String Function(String? value)? validator;
+  final TextEditingController? controller;
   @override
   State<CustomInputField> createState() => _CustomInputFieldState();
 }
@@ -28,39 +33,34 @@ class _CustomInputFieldState extends State<CustomInputField> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget.width * _persentage),
-      child: TextField(
-        obscureText: _passwordvisibilty,
+      child: TextFormField(
+        validator: widget.validator,
+        controller: widget.controller,
+        obscureText: _passwordvisibilty && widget.passwordfeatures,
         decoration: InputDecoration(
-          prefixIcon: widget.prevIcon,
-          suffixIcon: widget.passwordfeatures
-              ? IconButton(
-                  onPressed: () {
-                    _passwordvisibilty = !(_passwordvisibilty);
-                    setState(() {});
-                  },
-                  icon: _passwordvisibilty
-                      ? const Icon(Icons.visibility_outlined)
-                      : const Icon(Icons.visibility_off_outlined))
-              : null,
-          hintText: widget.hint,
-          hintStyle: const TextStyle(color: Colors.black54),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-                color: Colors.blueAccent,
-                style: BorderStyle.solid,
-                width: 3,
-                strokeAlign: StrokeAlign.center),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Colors.black38,
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
+            prefixIcon: widget.prevIcon,
+            suffixIcon: suffixIconMethod(),
+            hintText: widget.hint,
+            hintStyle: const TextStyle(color: Colors.black54),
+            border: myOutlineInputBorder,
+            enabledBorder: myOutlineInputBorder.copyWith(
+                borderSide: const BorderSide(color: Colors.black38)),
+            errorBorder: myOutlineInputBorder.copyWith(
+                borderSide: const BorderSide(color: Colors.redAccent))),
       ),
     );
+  }
+
+  IconButton? suffixIconMethod() {
+    return widget.passwordfeatures
+        ? IconButton(
+            onPressed: () {
+              _passwordvisibilty = !(_passwordvisibilty);
+              setState(() {});
+            },
+            icon: _passwordvisibilty
+                ? const Icon(Icons.visibility_outlined)
+                : const Icon(Icons.visibility_off_outlined))
+        : null;
   }
 }

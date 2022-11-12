@@ -1,18 +1,20 @@
+import 'create_or_login_cubit.dart';
 import 'package:fair_app/auth/shared/beautification.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomText extends StatelessWidget {
   const BottomText({
     Key? key,
     required this.width,
-    required this.heigth,
+    required this.height,
     required this.title,
     required this.buttonTitle,
   }) : super(key: key);
 
 // Parameters
   final double width;
-  final double heigth;
+  final double height;
   final String title;
   final String buttonTitle;
 
@@ -26,12 +28,17 @@ class BottomText extends StatelessWidget {
           style: Theme.of(context).textTheme.subtitle1?.copyWith(
               color: kcPrimaryCascadeTwilight, fontWeight: FontWeight.w400),
         ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            buttonTitle,
-            style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                color: kcPrimaryCascadeTwilight, fontWeight: FontWeight.w700),
+        BlocProvider(
+          create: (context) => CreateOrLoginCubit(),
+          child: TextButton(
+            onPressed: () {
+              context.read<CreateOrLoginCubit>().changescreen();
+            },
+            child: Text(
+              buttonTitle,
+              style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  color: kcPrimaryCascadeTwilight, fontWeight: FontWeight.w700),
+            ),
           ),
         ),
       ],
