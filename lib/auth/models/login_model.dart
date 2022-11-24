@@ -11,9 +11,9 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController? createEmailController;
   final TextEditingController? createPassController;
   final TextEditingController nullCheck = TextEditingController();
+  final GlobalKey<FormState> formKey;
   bool isLoginFail = false;
 
-  final GlobalKey<FormState> formKey;
   AuthCubit(
       {this.createEmailController,
       this.createPassController,
@@ -26,7 +26,6 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> loginFunc() async {
     if ((loginEmailController ?? nullCheck).text.isEmpty ||
         (loginPasswordController ?? nullCheck).text.isEmpty) {
-      print("Lütfen gerekli alanları doldurun");
       emit(Fail());
     } else {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -41,7 +40,6 @@ class AuthCubit extends Cubit<AuthState> {
     if ((createEmailController ?? nullCheck).text.isEmpty ||
         (createPassController ?? nullCheck).text.isEmpty ||
         (createNameController ?? nullCheck).text.isEmpty) {
-      print("Lütfen gerekli alanları doldurun");
       emit(Fail());
     } else {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(

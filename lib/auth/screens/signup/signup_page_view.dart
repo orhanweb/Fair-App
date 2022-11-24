@@ -11,17 +11,17 @@ import 'package:fair_app/auth/widgets/custom_input_field.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPageView extends StatelessWidget {
+class SignupPageView extends StatelessWidget {
   final BuildContext context;
   final dynamic state;
   final bool isKeyboardVisible;
 
-  const LoginPageView(
-      {Key? key,
-      required this.context,
-      this.state,
-      required this.isKeyboardVisible})
-      : super(key: key);
+  const SignupPageView({
+    Key? key,
+    required this.isKeyboardVisible,
+    required this.context,
+    required this.state,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -45,12 +45,12 @@ class LoginPageView extends StatelessWidget {
     return Align(
         alignment: Alignment.center,
         child: Padding(
-          padding: EdgeInsets.only(top: height * 0.4),
+          padding: EdgeInsets.only(top: height * 0.45),
           child: CustomLoginButton(
-            title: "Sign in",
+            title: "Sign up",
             ontap: () {
               context.read<AuthCubit>().postUserModel();
-              context.read<AuthCubit>().loginFunc();
+              context.read<AuthCubit>().createFunc();
             },
           ),
         ));
@@ -64,7 +64,7 @@ class LoginPageView extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: isKeyboardVisible
             ? Container()
-            : const TopTextWidget(title: "Welcome\nBack"),
+            : const TopTextWidget(title: "Create\nAccount"),
       ),
     );
   }
@@ -78,7 +78,7 @@ class LoginPageView extends StatelessWidget {
   }
 }
 
-// LOGIN CONTENT
+// Signup CONTENT
 class LoginContent extends StatelessWidget {
   const LoginContent(
       {super.key,
@@ -102,33 +102,24 @@ class LoginContent extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomInputField(
-                controller: context.read<AuthCubit>().loginEmailController,
-                prevIcon: const Icon(Icons.mail),
+                controller: context.read<AuthCubit>().createNameController,
                 width: width,
-                hint: "Email",
-                validator: (value) =>
-                    (value ?? "").length > 10 ? "" : 'Emaili tekrar giriniz',
+                hint: "Name",
+                prevIcon: const Icon(Icons.person),
               ),
               verticalSpaceTiny,
               CustomInputField(
-                controller: context.read<AuthCubit>().loginPasswordController,
-                prevIcon: const Icon(Icons.lock_rounded),
-                width: width,
-                hint: "PassWord",
-                passwordfeatures: true,
-                validator: (value) =>
-                    (value ?? "").length > 6 ? "" : 'Şifreniz yanlış',
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: width * 0.55),
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text("Forgot Password?",
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle2
-                            ?.copyWith(color: kcPrimaryCascadeTwilight))),
-              )
+                  controller: context.read<AuthCubit>().createEmailController,
+                  prevIcon: const Icon(Icons.mail),
+                  width: width,
+                  hint: "Email"),
+              verticalSpaceTiny,
+              CustomInputField(
+                  controller: context.read<AuthCubit>().createPassController,
+                  prevIcon: const Icon(Icons.lock_rounded),
+                  width: width,
+                  hint: "PassWord",
+                  passwordfeatures: true),
             ],
           ),
         ),

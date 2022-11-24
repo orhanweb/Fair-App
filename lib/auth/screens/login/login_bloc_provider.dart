@@ -2,7 +2,7 @@
 import 'package:fair_app/Home/screens/home.dart';
 import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/auth/screens/login/login_page_view.dart';
-import 'package:flutter/gestures.dart';
+import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +12,10 @@ class LoginBlocPattern extends StatelessWidget {
   final TextEditingController loginEmailController = TextEditingController();
   final TextEditingController loginPasswordController = TextEditingController();
   final bool isKeyboardVisible;
-  LoginBlocPattern({Key? key, required this.isKeyboardVisible})
-      : super(key: key);
+  LoginBlocPattern({
+    Key? key,
+    required this.isKeyboardVisible,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,7 @@ class LoginBlocPattern extends StatelessWidget {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is LoginSucces) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomeView()));
+              Get.to(const HomeView());
             }
 
             if (state is Fail) {
