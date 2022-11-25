@@ -4,7 +4,7 @@ import 'package:fair_app/auth/widgets/back_button.dart';
 import 'package:fair_app/auth/widgets/top_text_widget.dart';
 
 import 'package:fair_app/auth/models/login_model.dart';
-import 'package:fair_app/auth/shared/beautification.dart';
+
 import 'package:fair_app/auth/shared/helpers.widget.dart';
 import 'package:fair_app/auth/widgets/custom_button.dart';
 import 'package:fair_app/auth/widgets/custom_input_field.dart';
@@ -33,8 +33,8 @@ class SignupPageView extends StatelessWidget {
         const BackButtonWidget(),
         topText(height: height),
         LoginContent(
-            isKeyboardVisible: isKeyboardVisible,
-            autoValidateMode: autoValidateMode()),
+          isKeyboardVisible: isKeyboardVisible,
+        ),
         sendButton(height, context),
       ])),
     );
@@ -68,24 +68,16 @@ class SignupPageView extends StatelessWidget {
       ),
     );
   }
-
-  AutovalidateMode autoValidateMode() {
-    return state is LoginValidateState
-        ? (state.isValidate
-            ? AutovalidateMode.always
-            : AutovalidateMode.disabled)
-        : AutovalidateMode.disabled;
-  }
 }
 
 // Signup CONTENT
 class LoginContent extends StatelessWidget {
-  const LoginContent(
-      {super.key,
-      required this.isKeyboardVisible,
-      required this.autoValidateMode});
+  const LoginContent({
+    super.key,
+    required this.isKeyboardVisible,
+  });
   final bool isKeyboardVisible;
-  final AutovalidateMode autoValidateMode;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -97,7 +89,6 @@ class LoginContent extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: Form(
           key: context.read<AuthCubit>().formKey,
-          autovalidateMode: autoValidateMode,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

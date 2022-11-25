@@ -1,3 +1,4 @@
+import 'package:fair_app/firebase_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
@@ -28,11 +29,23 @@ class AuthCubit extends Cubit<AuthState> {
         (loginPasswordController ?? nullCheck).text.isEmpty) {
       emit(Fail());
     } else {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: (loginEmailController ?? nullCheck).text.trim(),
-          password: (loginPasswordController ?? nullCheck).text.trim());
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: (loginEmailController ?? nullCheck).text.trim(),
+            password: (loginPasswordController ?? nullCheck).text.trim());
 
-      emit(LoginSucces());
+        emit(LoginSucces());
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'invalid-email') {
+          emit(InvalidEmail());
+        } else if (e.code == 'user-disabled') {
+          emit(UserDisabled());
+        } else if (e.code == 'user-not-found') {
+          emit(UserNotFound());
+        } else if (e.code == 'wrong-password') {
+          emit(WrongPassword());
+        }
+      }
     }
   }
 
@@ -42,11 +55,19 @@ class AuthCubit extends Cubit<AuthState> {
         (createNameController ?? nullCheck).text.isEmpty) {
       emit(Fail());
     } else {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: (createEmailController ?? nullCheck).text.trim(),
-          password: (createPassController ?? nullCheck).text.trim());
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: (createEmailController ?? nullCheck).text.trim(),
+            password: (createPassController ?? nullCheck).text.trim());
 
-      emit(CreateSucces());
+        emit(CreateSucces());
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'email-already-in-use') {
+          emit(EmailAlreadyUse());
+        } else if (e.code == 'invalid-email') {
+          emit(InvalidEmail());
+        }
+      }
     }
   }
 
@@ -64,14 +85,28 @@ abstract class AuthState {}
 
 class LoginInitial extends AuthState {}
 
+//Text inputları için oluşturulan class
 class LoginValidateState extends AuthState {
   final bool isValidate;
 
   LoginValidateState({required this.isValidate});
 }
 
+// Login sayfası için kullanılan classlar
 class LoginSucces extends AuthState {}
 
+class UserDisabled extends AuthState {}
+
+class UserNotFound extends AuthState {}
+
+class WrongPassword extends AuthState {}
+
+//Hesap oluşturma için kullanılan classlar
 class CreateSucces extends AuthState {}
 
+class EmailAlreadyUse extends AuthState {}
+
+// Ortak kullanılan classlar
 class Fail extends AuthState {}
+
+class InvalidEmail extends AuthState {}

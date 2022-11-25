@@ -33,8 +33,8 @@ class LoginPageView extends StatelessWidget {
         const BackButtonWidget(),
         topText(height: height),
         LoginContent(
-            isKeyboardVisible: isKeyboardVisible,
-            autoValidateMode: autoValidateMode()),
+          isKeyboardVisible: isKeyboardVisible,
+        ),
         sendButton(height, context),
       ])),
     );
@@ -68,24 +68,16 @@ class LoginPageView extends StatelessWidget {
       ),
     );
   }
-
-  AutovalidateMode autoValidateMode() {
-    return state is LoginValidateState
-        ? (state.isValidate
-            ? AutovalidateMode.always
-            : AutovalidateMode.disabled)
-        : AutovalidateMode.disabled;
-  }
 }
 
 // LOGIN CONTENT
 class LoginContent extends StatelessWidget {
-  const LoginContent(
-      {super.key,
-      required this.isKeyboardVisible,
-      required this.autoValidateMode});
+  const LoginContent({
+    super.key,
+    required this.isKeyboardVisible,
+  });
   final bool isKeyboardVisible;
-  final AutovalidateMode autoValidateMode;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -97,7 +89,6 @@ class LoginContent extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: Form(
           key: context.read<AuthCubit>().formKey,
-          autovalidateMode: autoValidateMode,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -106,8 +97,6 @@ class LoginContent extends StatelessWidget {
                 prevIcon: const Icon(Icons.mail),
                 width: width,
                 hint: "Email",
-                validator: (value) =>
-                    (value ?? "").length > 10 ? "" : 'Emaili tekrar giriniz',
               ),
               verticalSpaceTiny,
               CustomInputField(
@@ -116,8 +105,6 @@ class LoginContent extends StatelessWidget {
                 width: width,
                 hint: "PassWord",
                 passwordfeatures: true,
-                validator: (value) =>
-                    (value ?? "").length > 6 ? "" : 'Şifreniz yanlış',
               ),
               Padding(
                 padding: EdgeInsets.only(left: width * 0.55),

@@ -1,5 +1,7 @@
+import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/const.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomInputField extends StatefulWidget {
   const CustomInputField({
@@ -10,9 +12,11 @@ class CustomInputField extends StatefulWidget {
     required this.prevIcon,
     this.validator,
     this.controller,
+    this.textisEmpty = false,
   }) : super(key: key);
 
   //parameters
+  final bool textisEmpty;
   final String hint;
   final double width;
   final bool passwordfeatures;
