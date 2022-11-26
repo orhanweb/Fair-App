@@ -2,6 +2,7 @@
 import 'package:fair_app/Home/screens/home.dart';
 import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/auth/screens/login/login_page_view.dart';
+
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
@@ -28,11 +29,23 @@ class LoginBlocPattern extends StatelessWidget {
           listener: (context, state) {
             if (state is LoginSucces) {
               Get.to(const HomeView());
+            } else if (state is InvalidEmail) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Lütfen geçerli bir Mail giriniz")));
+            } else if (state is UserDisabled) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(
+                      "Bu e posta sistem tarafından geçersiz kılınmıştır.")));
+            } else if (state is UserNotFound) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Bu e posta ile hesap oluşturulmamış.")));
+            } else if (state is WrongPassword) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Şifrenizi yanlış girdiniz.")));
             }
-
             if (state is Fail) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Lütfen kırmızı alanları doldurun")));
+                  content: Text("Lütfen tüm alanları doldurun")));
             }
           },
           builder: (context, state) {

@@ -49,7 +49,6 @@ class SignupPageView extends StatelessWidget {
           child: CustomLoginButton(
             title: "Sign up",
             ontap: () {
-              context.read<AuthCubit>().postUserModel();
               context.read<AuthCubit>().createFunc();
             },
           ),

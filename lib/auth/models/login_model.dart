@@ -1,8 +1,8 @@
-import 'package:fair_app/firebase_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final TextEditingController? loginEmailController;
@@ -13,6 +13,9 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController? createPassController;
   final TextEditingController nullCheck = TextEditingController();
   final GlobalKey<FormState> formKey;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool isLoginFail = false;
 
   AuthCubit(
@@ -30,7 +33,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(Fail());
     } else {
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        await _auth.signInWithEmailAndPassword(
             email: (loginEmailController ?? nullCheck).text.trim(),
             password: (loginPasswordController ?? nullCheck).text.trim());
 
@@ -56,9 +59,14 @@ class AuthCubit extends Cubit<AuthState> {
       emit(Fail());
     } else {
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final user = await _auth.createUserWithEmailAndPassword(
             email: (createEmailController ?? nullCheck).text.trim(),
             password: (createPassController ?? nullCheck).text.trim());
+
+        await _firestore
+            .collection("Users")
+            .doc(user.user!.uid)
+            .set({'userName': createNameController!.text});
 
         emit(CreateSucces());
       } on FirebaseAuthException catch (e) {
@@ -68,15 +76,6 @@ class AuthCubit extends Cubit<AuthState> {
           emit(InvalidEmail());
         }
       }
-    }
-  }
-
-  void postUserModel() {
-    if (formKey.currentState?.validate() ?? false) {
-      // TODO:service
-    } else {
-      isLoginFail = true;
-      emit(LoginValidateState(isValidate: isLoginFail));
     }
   }
 }

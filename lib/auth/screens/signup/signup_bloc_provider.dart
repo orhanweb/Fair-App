@@ -41,8 +41,8 @@ class SignupBlocProvider extends StatelessWidget {
                 content: Text("Lütfen geçerli bir Mail giriniz")));
           }
           if (state is Fail) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text("Lütfen kırmızı alanları doldurun")));
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Lütfen tüm alanları doldurun")));
           }
         },
         builder: (context, state) {

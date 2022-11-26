@@ -5,12 +5,12 @@ class NewRegistration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('NewRegistration'),
-      ),
-      body: Center(
-        child: Text('NewRegistration'),
-      ),
-    );
+        body: Center(
+          child: Text('NewRegistration'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.upload_file_outlined),
+        ));
   }
 }

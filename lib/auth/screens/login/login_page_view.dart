@@ -1,7 +1,9 @@
+import 'package:fair_app/Home/screens/home.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fair_app/auth/widgets/back_button.dart';
 import 'package:fair_app/auth/widgets/top_text_widget.dart';
+import 'package:get/get.dart';
 
 import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/auth/shared/beautification.dart';
@@ -49,7 +51,6 @@ class LoginPageView extends StatelessWidget {
           child: CustomLoginButton(
             title: "Sign in",
             ontap: () {
-              context.read<AuthCubit>().postUserModel();
               context.read<AuthCubit>().loginFunc();
             },
           ),

@@ -42,6 +42,7 @@ dev_dependencies:
     sdk: flutter
   firebase_core: ^2.1.1
   firebase_auth: ^4.1.1
+  cloud_firestore: ^4.1.0
   flutter_bloc: ^8.1.1
   keyboard_dismisser: ^3.0.0
   flutter_keyboard_visibility: ^5.4.0
