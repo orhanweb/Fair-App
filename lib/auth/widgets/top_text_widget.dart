@@ -1,4 +1,4 @@
-import 'package:fair_app/auth/shared/beautification.dart';
+import 'package:fair_app/const.dart';
 import 'package:flutter/material.dart';
 
 class TopTextWidget extends StatelessWidget {
@@ -7,8 +7,7 @@ class TopTextWidget extends StatelessWidget {
     required this.title,
   }) : super(key: key);
 
-// Parameters
-
+  // Parameter
   final String title;
 
   @override

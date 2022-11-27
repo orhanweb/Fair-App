@@ -1,11 +1,12 @@
 import 'package:fair_app/Home/screens/new_registration.dart';
+import 'package:fair_app/Home/screens/profile.dart';
 
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key, required this.username}) : super(key: key);
   final int selectedIndex = 0;
-
+  final String username;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,12 +24,8 @@ class HomeView extends StatelessWidget {
               )),
           body: TabBarView(children: [
             const NewRegistration(),
-            Container(
-              color: Colors.yellow,
-            ),
-            Container(
-              color: Colors.blue,
-            )
+            Container(color: Colors.yellow),
+            Profile(username: username)
           ]),
         ));
   }

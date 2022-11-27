@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginBlocPattern extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey();
-  final TextEditingController loginEmailController = TextEditingController();
+  final TextEditingController loginUsernameController = TextEditingController();
   final TextEditingController loginPasswordController = TextEditingController();
   final bool isKeyboardVisible;
   LoginBlocPattern({
@@ -23,29 +23,26 @@ class LoginBlocPattern extends StatelessWidget {
     return BlocProvider(
         create: (context) => AuthCubit(
             formKey: formKey,
-            loginEmailController: loginEmailController,
+            loginUsernameController: loginUsernameController,
             loginPasswordController: loginPasswordController),
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
-            if (state is LoginSucces) {
-              Get.to(const HomeView());
-            } else if (state is InvalidEmail) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Lütfen geçerli bir Mail giriniz")));
-            } else if (state is UserDisabled) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text(
-                      "Bu e posta sistem tarafından geçersiz kılınmıştır.")));
+            if (state is UserDisabled) {
+              context.read<AuthCubit>().mySnackBar(context,
+                  "Bu e posta sistem tarafından geçersiz kılınmıştır.");
             } else if (state is UserNotFound) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Bu e posta ile hesap oluşturulmamış.")));
+              context.read<AuthCubit>().mySnackBar(
+                  context, "Bu kullanıcı adı ile hesap oluşturulmamış.");
             } else if (state is WrongPassword) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Şifrenizi yanlış girdiniz.")));
+              context
+                  .read<AuthCubit>()
+                  .mySnackBar(context, "Şifrenizi yanlış girdiniz.");
             }
+
             if (state is Fail) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Lütfen tüm alanları doldurun")));
+              context
+                  .read<AuthCubit>()
+                  .mySnackBar(context, "Lütfen tüm alanları doldurun");
             }
           },
           builder: (context, state) {

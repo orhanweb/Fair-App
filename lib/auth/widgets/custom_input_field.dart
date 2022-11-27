@@ -42,15 +42,19 @@ class _CustomInputFieldState extends State<CustomInputField> {
         controller: widget.controller,
         obscureText: _passwordvisibilty && widget.passwordfeatures,
         decoration: InputDecoration(
-            prefixIcon: widget.prevIcon,
-            suffixIcon: suffixIconMethod(),
-            hintText: widget.hint,
-            hintStyle: const TextStyle(color: Colors.black54),
-            border: myOutlineInputBorder,
-            enabledBorder: myOutlineInputBorder.copyWith(
-                borderSide: const BorderSide(color: Colors.black38)),
-            errorBorder: myOutlineInputBorder.copyWith(
-                borderSide: const BorderSide(color: Colors.redAccent))),
+          prefixIcon: widget.prevIcon,
+          suffixIcon: suffixIconMethod(),
+          hintText: widget.hint,
+          hintStyle: const TextStyle(color: kcblack54),
+          border: myOutlineInputBorder,
+          focusedBorder: myOutlineInputBorder,
+          focusColor: kcPrimaryCascadeTwilight,
+          iconColor: kcPrimaryCascadeTwilight,
+          prefixIconColor: kcPrimaryCascadeTwilight,
+          suffixIconColor: kcPrimaryCascadeTwilight,
+          enabledBorder: myOutlineInputBorder.copyWith(
+              borderSide: const BorderSide(color: kcblack38)),
+        ),
       ),
     );
   }

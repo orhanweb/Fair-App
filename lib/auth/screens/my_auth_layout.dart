@@ -1,9 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:fair_app/auth/screens/login/login_keyboard_controlls.dart';
 import 'package:fair_app/auth/screens/signup/signup_keyboard_controlls.dart';
-import 'package:fair_app/auth/shared/beautification.dart';
 import 'package:fair_app/auth/shared/helpers.widget.dart';
+import 'package:fair_app/auth/widgets/custom_buttons.dart';
 import 'package:fair_app/auth/widgets/top_text_widget.dart';
+import 'package:fair_app/const.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -12,11 +13,15 @@ class MyAuthLayout extends StatelessWidget {
   const MyAuthLayout({super.key});
 
   final String _mainTitle = "Fuar'a Hoşgeldiniz";
+  final String _signupText = "Hesap Oluştur";
+  final String _signinText = "Giriş Yap";
+  final String _cilogluImage = "assets/images/ciloglu.png";
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double width = size.width;
+    double height = size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -26,27 +31,37 @@ class MyAuthLayout extends StatelessWidget {
           children: [
             SizedBox(
                 width: width * 0.5,
-                child:
-                    Image.asset("assets/images/ciloglu.png", fit: BoxFit.fill)),
+                child: Image.asset(_cilogluImage, fit: BoxFit.fill)),
             TopTextWidget(title: _mainTitle),
             verticalSpaceSmall,
-            ElevatedButton(
-              onPressed: () {
+            CustomElevatedButton(
+              title: Text(
+                _signupText,
+                style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: myButtonFontSize),
+              ),
+              height: height * 0.07,
+              width: width * 0.9,
+              ontap: () {
                 Get.to(const SignupKeyboardControls());
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kcPrimaryCascadeTwilight,
-                fixedSize: Size.fromWidth(width * 0.9),
-              ),
-              child: const Text("Hesap Oluştur"),
             ),
-            OutlinedButton(
-              onPressed: () {
+            verticalSpaceTiny,
+            CustomOutlinedButton(
+              title: Text(
+                _signinText,
+                style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    color: kcPrimaryCascadeTwilight,
+                    fontWeight: FontWeight.bold,
+                    fontSize: myButtonFontSize),
+              ),
+              height: height * 0.07,
+              width: width * 0.9,
+              ontap: () {
                 Get.to(const LoginKeyboard());
               },
-              style: OutlinedButton.styleFrom(
-                  fixedSize: Size.fromWidth(width * 0.9)),
-              child: const Text("Oturum Aç"),
             )
           ],
         ),
