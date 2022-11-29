@@ -1,5 +1,5 @@
-import 'package:fair_app/auth/shared/helpers.widget.dart';
-import 'package:fair_app/auth/widgets/top_text_widget.dart';
+import 'package:fair_app/shared/helpers.widget.dart';
+import 'package:fair_app/widgets/top_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {

@@ -1,12 +1,12 @@
-import 'package:fair_app/const.dart';
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fair_app/auth/widgets/top_text_widget.dart';
+import 'package:fair_app/widgets/top_text_widget.dart';
 
 import 'package:fair_app/auth/models/login_model.dart';
-import 'package:fair_app/auth/shared/helpers.widget.dart';
-import 'package:fair_app/auth/widgets/custom_buttons.dart';
-import 'package:fair_app/auth/widgets/custom_input_field.dart';
+import 'package:fair_app/shared/helpers.widget.dart';
+import 'package:fair_app/widgets/custom_buttons.dart';
+import 'package:fair_app/widgets/custom_input_field.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +24,7 @@ class LoginPageView extends StatelessWidget {
 
   // Local Variables
   final String _sendButtonText = "Giriş Yap";
-  final String _topTextTitle = "Tekrar\nHoşgeldiniz";
+  final String _topTextTitle = "Tekrardan\nHoşgeldiniz";
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;

@@ -1,4 +1,6 @@
 import 'package:fair_app/Home/screens/home.dart';
+import 'package:fair_app/shared/helpers.widget.dart';
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
@@ -111,9 +113,18 @@ class AuthCubit extends Cubit<AuthState> {
   //////////////////////////////////////////////////////////
   void mySnackBar(BuildContext context, String title) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(title),
+      content: Row(
+        children: [
+          const Icon(
+            Icons.error_outline_rounded,
+            color: kcMediumGreyPalladium,
+          ),
+          const HorizontalSpacers(boyut: 0.02),
+          Text(title)
+        ],
+      ),
       behavior: SnackBarBehavior.floating,
-      backgroundColor: Colors.teal,
+      backgroundColor: kcPrimaryCascadeTwilight,
     ));
   }
 }

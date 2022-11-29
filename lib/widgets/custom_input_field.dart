@@ -1,7 +1,5 @@
-import 'package:fair_app/auth/models/login_model.dart';
-import 'package:fair_app/const.dart';
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomInputField extends StatefulWidget {
   const CustomInputField({

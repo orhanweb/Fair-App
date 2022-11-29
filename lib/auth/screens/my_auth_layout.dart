@@ -1,10 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:fair_app/auth/screens/login/login_keyboard_controlls.dart';
 import 'package:fair_app/auth/screens/signup/signup_keyboard_controlls.dart';
-import 'package:fair_app/auth/shared/helpers.widget.dart';
-import 'package:fair_app/auth/widgets/custom_buttons.dart';
-import 'package:fair_app/auth/widgets/top_text_widget.dart';
-import 'package:fair_app/const.dart';
+import 'package:fair_app/shared/helpers.widget.dart';
+import 'package:fair_app/widgets/custom_buttons.dart';
+import 'package:fair_app/widgets/top_text_widget.dart';
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

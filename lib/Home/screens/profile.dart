@@ -9,7 +9,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(username),
+        child: Text("Hoşgeldiniz $username"),
       ),
     );
   }

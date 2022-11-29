@@ -1,4 +1,4 @@
-import 'package:fair_app/const.dart';
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
 class TopTextWidget extends StatelessWidget {

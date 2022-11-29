@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:fair_app/auth/screens/my_auth_layout.dart';
-import 'package:fair_app/const.dart';
+import 'package:fair_app/Home/screens/home.dart';
+
 import 'package:fair_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyAuthLayout(),
+      // home: const MyAuthLayout(),
+      home: const HomeView(username: "admin"),
     );
   }
 }

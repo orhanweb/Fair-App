@@ -1,21 +1,22 @@
-import 'package:fair_app/const.dart';
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  CustomElevatedButton(
+  const CustomElevatedButton(
       {super.key,
       required this.title,
       this.ontap,
       required this.height,
-      required this.width});
+      required this.width,
+      this.style});
 
   final double height;
   final double width;
 
   final void Function()? ontap;
   final Widget title;
-  final ButtonStyle _style = customelevatedbuttomstyle;
+  final ButtonStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class CustomElevatedButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         onPressed: ontap,
-        style: _style,
+        style: style ?? customelevatedbuttomstyle,
         child: title,
       ),
     );

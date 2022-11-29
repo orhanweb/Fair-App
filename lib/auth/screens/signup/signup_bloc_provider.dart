@@ -1,7 +1,6 @@
 import 'package:fair_app/Home/screens/home.dart';
 import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/auth/screens/signup/signup_page_view.dart';
-import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,8 +30,9 @@ class SignupBlocProvider extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is EmailAlreadyUse) {
-            context.read<AuthCubit>().mySnackBar(context,
-                "Girdiğiniz E-Mail zaten kullanılıyor. Lütfen Oturum açmayı deneyin");
+            context
+                .read<AuthCubit>()
+                .mySnackBar(context, "Girdiğiniz mail zaten kullanılıyor.");
           } else if (state is InvalidEmail) {
             context
                 .read<AuthCubit>()
