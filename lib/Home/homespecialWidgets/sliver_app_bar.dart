@@ -1,8 +1,11 @@
+import 'package:fair_app/Home/screens/profile.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MySliverAppbar extends StatelessWidget {
-  const MySliverAppbar({super.key});
+  const MySliverAppbar({super.key, required this.username});
+  final String username;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,11 @@ class MySliverAppbar extends StatelessWidget {
         title: const Text("Fuar Anasayfa"),
         scrolledUnderElevation: 0,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings_sharp))
+          IconButton(
+              onPressed: () {
+                Get.to(Profile(username: username));
+              },
+              icon: const Icon(Icons.settings_sharp))
         ],
         pinned: true,
         floating: true,

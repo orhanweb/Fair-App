@@ -43,3 +43,11 @@ final ButtonStyle customoutlinedbuttomstyle = OutlinedButton.styleFrom(
   backgroundColor: kcMediumGreyPalladium,
   side: myBorderSide,
 );
+
+// Input Border Style
+InputDecoration customhomeinputstyle(String text) {
+  return InputDecoration(
+      label: Text(text),
+      border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20))));
+}

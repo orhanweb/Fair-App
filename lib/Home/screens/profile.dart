@@ -1,3 +1,4 @@
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
@@ -8,8 +9,15 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Profil"),
+      ),
       body: Center(
-        child: Text("Hoşgeldiniz $username"),
+        child: Text(
+          "Hoşgeldiniz $username",
+          style:
+              Theme.of(context).textTheme.headline5?.copyWith(color: kcblack54),
+        ),
       ),
     );
   }

@@ -27,7 +27,9 @@ class HomeView extends StatelessWidget {
               body: NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
-                    const MySliverAppbar(),
+                    MySliverAppbar(
+                      username: username,
+                    ),
                   ];
                 },
                 body: TabBarView(children: [

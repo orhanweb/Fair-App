@@ -1,12 +1,12 @@
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
-Widget newRegInputField(TextEditingController controller, String label) {
-  return TextField(
-    controller: controller,
-    maxLength: 25,
-    decoration: InputDecoration(
-        hintText: label,
-        border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)))),
+Widget newRegInputField(TextEditingController controller, String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+    child: TextField(
+      controller: controller,
+      decoration: customhomeinputstyle(text),
+    ),
   );
 }
