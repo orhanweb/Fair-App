@@ -47,6 +47,7 @@ dev_dependencies:
   keyboard_dismisser: ^3.0.0
   flutter_keyboard_visibility: ^5.4.0
   get: ^4.6.5
+  equatable: ^2.0.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

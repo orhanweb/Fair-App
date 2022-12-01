@@ -2,6 +2,7 @@
 import 'package:fair_app/Home/screens/home.dart';
 import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/auth/screens/login/login_page_view.dart';
+import 'package:fair_app/widgets/custom_snack_bar.dart';
 
 import 'package:get/get.dart';
 
@@ -28,21 +29,15 @@ class LoginBlocPattern extends StatelessWidget {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is UserDisabled) {
-              context.read<AuthCubit>().mySnackBar(context,
+              mySnackBar(context,
                   "Bu e posta sistem tarafından geçersiz kılınmıştır.");
             } else if (state is UserNotFound) {
-              context.read<AuthCubit>().mySnackBar(
-                  context, "Bu kullanıcı adı ile hesap oluşturulmamış.");
+              mySnackBar(context, "Bu kullanıcı adı ile hesap oluşturulmamış.");
             } else if (state is WrongPassword) {
-              context
-                  .read<AuthCubit>()
-                  .mySnackBar(context, "Şifrenizi yanlış girdiniz.");
+              mySnackBar(context, "Şifrenizi yanlış girdiniz.");
             }
-
             if (state is Fail) {
-              context
-                  .read<AuthCubit>()
-                  .mySnackBar(context, "Lütfen tüm alanları doldurun");
+              mySnackBar(context, "Lütfen tüm alanları doldurun");
             }
           },
           builder: (context, state) {

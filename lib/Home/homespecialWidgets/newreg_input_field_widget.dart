@@ -5,6 +5,8 @@ Widget newRegInputField(TextEditingController controller, String text) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 15.0),
     child: TextField(
+      maxLines: 5,
+      minLines: 1,
       controller: controller,
       decoration: customhomeinputstyle(text),
     ),

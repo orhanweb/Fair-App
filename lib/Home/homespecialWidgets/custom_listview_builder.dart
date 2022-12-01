@@ -5,23 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyListViewBuilder extends StatelessWidget {
-  MyListViewBuilder({super.key, required this.label});
-  final String label;
+  const MyListViewBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewRegCubit, List>(
-      listener: (context, state) {},
+    return BlocBuilder<NewRegCubit, NewRegState>(
       builder: (context, state) {
         print(
             "List view eleman sayısı ve tipi: ${state.runtimeType} ${state.runtimeType}");
-        return state.isNotEmpty
+        return state is NewReginitialize &&
+                state.textfieldListwithControllers.isNotEmpty
             ? ListView.separated(
                 separatorBuilder: (context, index) => verticalSpaceTiny,
                 physics: const BouncingScrollPhysics(),
-                itemCount: state.length,
+                itemCount: state.textfieldListwithControllers.length,
                 itemBuilder: (context, index) {
-                  return state[index];
+                  return state.textfieldListwithControllers[index][1];
                 },
               )
             : Center(

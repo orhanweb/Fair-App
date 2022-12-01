@@ -3,6 +3,7 @@ import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
 import 'package:fair_app/widgets/custom_divider.dart';
+import 'package:fair_app/widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,17 +34,16 @@ class CustomFloatingActionButtons extends StatelessWidget {
             child: const Icon(Icons.add),
           ),
           verticalSpaceTiny,
-          FloatingActionButton(
-            onPressed: () => showModalBottomSheet(
-              context: context,
-              builder: mycustomBottomSheet,
-              shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(30))),
-              elevation: 50,
-            ),
-            backgroundColor: kcPrimaryCascadeTwilight,
-            child: const Icon(Icons.cloud_upload_outlined),
+          BlocBuilder<NewRegCubit, NewRegState>(
+            builder: (context, state) {
+              return FloatingActionButton(
+                onPressed: () {
+                  mySnackBar(context, "Denemeden bilemezsin");
+                },
+                backgroundColor: kcPrimaryCascadeTwilight,
+                child: const Icon(Icons.cloud_upload_outlined),
+              );
+            },
           ),
         ],
       ),
@@ -51,6 +51,16 @@ class CustomFloatingActionButtons extends StatelessWidget {
   }
 }
 
+//Add floatingactionbutton Later
+
+// showModalBottomSheet(
+//               context: context,
+//               builder: mycustomBottomSheet,
+//               shape: const RoundedRectangleBorder(
+//                   borderRadius:
+//                       BorderRadius.vertical(top: Radius.circular(30))),
+//               elevation: 50,
+//             ),
 // SEND CLOUD BOTTOM SHEET
 Widget mycustomBottomSheet(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
@@ -62,7 +72,7 @@ Widget mycustomBottomSheet(BuildContext context) {
         verticalSpaceTiny,
         myDivider(),
         verticalSpaceTiny,
-        BlocBuilder<NewRegCubit, List>(
+        BlocBuilder<NewRegCubit, NewRegState>(
           builder: (context, state) {
             return CustomElevatedButton(
               title:
@@ -80,12 +90,8 @@ Widget mycustomBottomSheet(BuildContext context) {
               height: height * 0.07,
               width: width * 0.5,
               ontap: () {
-                context.read<NewRegCubit>().publishcontrollers;
                 print("Clouda Gönder");
-                String deneme = state.isEmpty
-                    ? ""
-                    : state[state.length - 1].runtimeType.toString();
-                print(deneme);
+                context.read<NewRegCubit>().write(context);
               },
             );
           },
@@ -115,17 +121,21 @@ Widget mycustomDialog(BuildContext context) {
         width: width * 0.3,
         ontap: () => Navigator.pop(context, 'İptal Et'),
       ),
-      BlocBuilder<NewRegCubit, List>(
+      BlocBuilder<NewRegCubit, NewRegState>(
         builder: (context, state) {
           return CustomElevatedButton(
             title: const Text("Ekle"),
             height: height * 0.07,
             width: width * 0.3,
             ontap: () {
-              context.read<NewRegCubit>().addnewElement(dialogcontroller.text);
-
-              print(dialogcontroller.text);
-              Navigator.pop(context, 'Ekle');
+              if (dialogcontroller.text.isNotEmpty) {
+                context
+                    .read<NewRegCubit>()
+                    .addnewElement(dialogcontroller.text);
+                Navigator.pop(context, 'Ekle');
+              } else {
+                mySnackBar(context, "Başlık alanı boş bırakılamaz");
+              }
             },
           );
         },

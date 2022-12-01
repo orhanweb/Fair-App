@@ -25,8 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) =>
-                NewRegCubit(textfieldList: [], controllers: []))
+            create: (context) => NewRegCubit(textfieldListwithControllers: []))
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

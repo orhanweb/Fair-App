@@ -12,9 +12,9 @@ class NewRegistration extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    //CUBIT
+
     return Scaffold(
-      body: MyListViewBuilder(label: "deneme"),
+      body: const MyListViewBuilder(),
       floatingActionButton: !isKeyboardVisible
           ? CustomFloatingActionButtons(
               context: context, height: height, width: width)

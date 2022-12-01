@@ -107,26 +107,6 @@ class AuthCubit extends Cubit<AuthState> {
       }
     }
   }
-
-  //////////////////////////////////////////////////////////
-  //                    CUSTOM SNACKBAR                   //
-  //////////////////////////////////////////////////////////
-  void mySnackBar(BuildContext context, String title) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Row(
-        children: [
-          const Icon(
-            Icons.error_outline_rounded,
-            color: kcMediumGreyPalladium,
-          ),
-          const HorizontalSpacers(boyut: 0.02),
-          Text(title)
-        ],
-      ),
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: kcPrimaryCascadeTwilight,
-    ));
-  }
 }
 
 abstract class AuthState {}
