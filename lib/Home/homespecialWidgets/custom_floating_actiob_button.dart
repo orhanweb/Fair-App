@@ -27,19 +27,22 @@ class CustomFloatingActionButtons extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton(
-            onPressed: () =>
-                showDialog(context: context, builder: mycustomDialog),
-            backgroundColor: kcPrimaryCascadeTwilight,
-            child: const Icon(Icons.add),
+          BlocBuilder<NewRegCubit, NewRegState>(
+            builder: (context, state) {
+              return FloatingActionButton(
+                onPressed: context.read<NewRegCubit>().fairForCustomer,
+                //     showDialog(context: context, builder: mycustomDialog),
+                backgroundColor: kcPrimaryCascadeTwilight,
+                child: const Icon(Icons.add),
+              );
+            },
           ),
           verticalSpaceTiny,
           BlocBuilder<NewRegCubit, NewRegState>(
             builder: (context, state) {
               return FloatingActionButton(
                 onPressed: () {
-                  mySnackBar(context, "Denemeden bilemezsin");
-                  // context.read<NewRegCubit>().write(context);
+                  context.read<NewRegCubit>().writetoFirebase(context);
                 },
                 backgroundColor: kcPrimaryCascadeTwilight,
                 child: const Icon(Icons.cloud_upload_outlined),
@@ -92,7 +95,7 @@ Widget mycustomBottomSheet(BuildContext context) {
               width: width * 0.5,
               ontap: () {
                 print("Clouda Gönder");
-                context.read<NewRegCubit>().write(context);
+                context.read<NewRegCubit>().writetoFirebase(context);
               },
             );
           },

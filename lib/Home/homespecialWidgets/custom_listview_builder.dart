@@ -6,13 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyListViewBuilder extends StatelessWidget {
   const MyListViewBuilder({super.key});
-
+  final String nolistimage = "assets/images/sticky-note.png";
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewRegCubit, NewRegState>(
+    double width = MediaQuery.of(context).size.width;
+    return BlocConsumer<NewRegCubit, NewRegState>(
+      listener: (context, state) {
+        state is NewReginitialize
+            ? print(state.textfieldListwithControllers.length)
+            : print("BOŞ");
+      },
       builder: (context, state) {
-        print(
-            "List view eleman sayısı ve tipi: ${state.runtimeType} ${state.runtimeType}");
         return state is NewReginitialize &&
                 state.textfieldListwithControllers.isNotEmpty
             ? ListView.separated(
@@ -23,14 +27,26 @@ class MyListViewBuilder extends StatelessWidget {
                   return state.textfieldListwithControllers[index][1];
                 },
               )
-            : Center(
-                child: Text(
-                "Liste Boş",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(color: kcblack54),
-              ));
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Image.asset(
+                      width: width * 0.7,
+                      nolistimage,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  verticalSpaceTiny,
+                  Text(
+                    "Liste Boş",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        ?.copyWith(color: kcblack54),
+                  ),
+                ],
+              );
       },
     );
   }

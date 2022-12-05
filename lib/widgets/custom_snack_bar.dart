@@ -19,24 +19,10 @@ void mySnackBar(BuildContext context, String title) {
         Text(title)
       ],
     ),
-    clipBehavior: Clip.antiAlias,
-    dismissDirection: DismissDirection.up,
-    padding: EdgeInsets.only(bottom: height * 0.1),
-    margin: EdgeInsets.only(
-        bottom: height * 0.8, left: width * 0.05, right: width * 0.05),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     elevation: 10,
-    duration: const Duration(seconds: 2),
+    duration: const Duration(milliseconds: 800),
     behavior: SnackBarBehavior.floating,
     backgroundColor: kcPrimaryCascadeTwilight,
   ));
-}
-
-class MyCustomSnacBar extends StatelessWidget {
-  const MyCustomSnacBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
 }

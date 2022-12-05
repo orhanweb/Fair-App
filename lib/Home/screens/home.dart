@@ -1,6 +1,7 @@
 import 'package:fair_app/Home/homespecialWidgets/sliver_app_bar.dart';
 import 'package:fair_app/Home/screens/archives.dart';
 import 'package:fair_app/Home/screens/new_registration.dart';
+import 'package:fair_app/Home/screens/templates_view.dart';
 
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class HomeView extends StatelessWidget {
         gestures: const [GestureType.onPanCancel],
         //TABBAR AND PAGES
         child: DefaultTabController(
-            length: 2,
+            length: 3,
             child: Scaffold(
               body: NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -35,6 +36,7 @@ class HomeView extends StatelessWidget {
                 body: TabBarView(children: [
                   NewRegistration(isKeyboardVisible: isKeyboardVisible),
                   const Archives(),
+                  const TemplatesView()
                 ]),
               ),
             )),

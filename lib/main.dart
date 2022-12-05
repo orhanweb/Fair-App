@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:fair_app/Home/models/home_card_list_cubit.dart';
 import 'package:fair_app/Home/models/home_cubit_model.dart';
 import 'package:fair_app/Home/screens/home.dart';
 
@@ -25,14 +26,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => NewRegCubit(textfieldListwithControllers: []))
+            create: (context) => NewRegCubit(textfieldListwithControllers: [])),
+        BlocProvider(
+          create: (context) => CardListCubit(mainCardList: []),
+        ),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData(),
         // home: const MyAuthLayout(),
         home: const HomeView(username: "admin"),
       ),

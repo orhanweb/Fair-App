@@ -37,6 +37,9 @@ class MySliverAppbar extends StatelessWidget {
           tabs: [
             Tab(text: "Yeni Kayıt"),
             Tab(text: "Kaydedilenler"),
+            Tab(
+              text: "Şablonlar",
+            )
           ],
         ));
   }

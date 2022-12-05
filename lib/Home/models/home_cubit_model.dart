@@ -12,46 +12,107 @@ class NewRegCubit extends Cubit<NewRegState> {
   final List<List> textfieldListwithControllers;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  //////////////////////////////////////////////////////////
+  //                  ADD NEW ELEMENT                     //
+  //////////////////////////////////////////////////////////
   void addnewElement(String text) {
     final TextEditingController controller = TextEditingController();
     final List newElementList = [];
-
+    print("huuuu");
     newElementList.add(controller);
     newElementList.add(newRegInputField(controller, text));
     newElementList.add(text);
     textfieldListwithControllers.add(newElementList);
+    print(textfieldListwithControllers);
+    emit(NewReginitialize(
+        textfieldListwithControllers: textfieldListwithControllers));
+  }
+  //FUNC END : ADD NEW ELEMENT
 
+  //////////////////////////////////////////////////////////
+  //                SEND FORM TO FIREBASE                 //
+  //////////////////////////////////////////////////////////
+  Future<void> writetoFirebase(BuildContext contextforSnackBar) async {
+    bool isShowSnackBar = false;
+    int bosmu = 0;
+    Map<String, dynamic> sendtoFireStore = {};
+    if (textfieldListwithControllers.isNotEmpty) {
+      for (var i = 0; i < textfieldListwithControllers.length; i++) {
+        if (textfieldListwithControllers[i][0].text.isEmpty) {
+          bosmu++;
+        }
+      }
+      if (bosmu == textfieldListwithControllers.length) {
+        mySnackBar(contextforSnackBar, "Oluşturulan liste boş");
+      } else {
+        for (var i = 0; i < textfieldListwithControllers.length; i++) {
+          if (textfieldListwithControllers[i][0].text.isEmpty) {
+            if (!isShowSnackBar) {
+              isShowSnackBar = true;
+              mySnackBar(contextforSnackBar,
+                  "Boş bırakılan alanlar dikkate alınmadı!");
+            }
+            continue;
+          }
+          sendtoFireStore["${textfieldListwithControllers[i][2]}"] =
+              "${textfieldListwithControllers[i][0].text}";
+
+          textfieldListwithControllers[i][0].clear();
+        }
+        if (sendtoFireStore.values.isNotEmpty) {
+          try {
+            await _firestore
+                .collection("Users")
+                .doc("admin")
+                .collection("Kayıtlar")
+                .doc("Kayıt1")
+                .set(sendtoFireStore)
+                .then(
+              (value) {
+                mySnackBar(contextforSnackBar, "Başarıyla Gönderildi");
+              },
+            );
+          } on FirebaseException {
+            mySnackBar(contextforSnackBar,
+                "Kaydınız Gönderilirken Bir Sorun Oluştu Lütfen Tekrar Deneyiniz");
+          }
+        }
+      }
+
+      emit(NewReginitialize(
+          textfieldListwithControllers: textfieldListwithControllers));
+    } else {
+      mySnackBar(contextforSnackBar, "Boş Liste Gönderilemez");
+    }
+  }
+
+  //FUNC END : SEND FORM TO FIREBASE
+
+  void cleartextfieldListwithControllers() {
+    textfieldListwithControllers.clear();
     emit(NewReginitialize(
         textfieldListwithControllers: textfieldListwithControllers));
   }
 
-  Future<void> write(BuildContext contextforSnackBar) async {
-    bool isShowSnackBar = false;
-    Map<String, dynamic> sendtoFireStore = {};
-    for (var i = 0; i < textfieldListwithControllers.length; i++) {
-      if (textfieldListwithControllers[i][0].text.isEmpty) {
-        if (!isShowSnackBar) {
-          isShowSnackBar = true;
-          mySnackBar(
-              contextforSnackBar, "Boş bırakılan alanlar dikkate alınmadı!");
-        }
-        continue;
-      }
-      sendtoFireStore["${textfieldListwithControllers[i][2]}"] =
-          "${textfieldListwithControllers[i][0].text}";
+  //*********************************************************************************************************************************************************
+  //                                                                                                                                                        *
+  //                                                    CARD TEMPLATE SETTINGS AND FUNCTIONS                                                                *
+  //                                                                                                                                                        *
+  //*********************************************************************************************************************************************************
 
-      textfieldListwithControllers[i][0].clear();
-    }
-    if (sendtoFireStore.isNotEmpty) {
-      await _firestore
-          .collection("Users")
-          .doc("admin")
-          .collection("Kayıtlar")
-          .doc("Kayıt1")
-          .set(sendtoFireStore);
-      print(sendtoFireStore);
-      emit(NewReginitialize(
-          textfieldListwithControllers: textfieldListwithControllers));
+  void fairForCustomer() {
+    print("FAİR FOR CUSTOMER");
+    final List<String> templateList = [
+      "Fuarın Adı",
+      "Şirketin Adı",
+      "Görüştüğünüz Kişinin Adı",
+      "İlgilendiğiniz Ürünler",
+    ];
+    cleartextfieldListwithControllers();
+    for (String title in templateList) {
+      print(title);
+
+      addnewElement(title);
     }
   }
 }
