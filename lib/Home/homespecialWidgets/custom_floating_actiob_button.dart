@@ -39,6 +39,7 @@ class CustomFloatingActionButtons extends StatelessWidget {
               return FloatingActionButton(
                 onPressed: () {
                   mySnackBar(context, "Denemeden bilemezsin");
+                  // context.read<NewRegCubit>().write(context);
                 },
                 backgroundColor: kcPrimaryCascadeTwilight,
                 child: const Icon(Icons.cloud_upload_outlined),
