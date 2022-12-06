@@ -10,12 +10,7 @@ class MyListViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return BlocConsumer<NewRegCubit, NewRegState>(
-      listener: (context, state) {
-        state is NewReginitialize
-            ? print(state.textfieldListwithControllers.length)
-            : print("BOŞ");
-      },
+    return BlocBuilder<NewRegCubit, NewRegState>(
       builder: (context, state) {
         return state is NewReginitialize &&
                 state.textfieldListwithControllers.isNotEmpty

@@ -93,28 +93,6 @@ class NewRegCubit extends Cubit<NewRegState> {
     emit(NewReginitialize(
         textfieldListwithControllers: textfieldListwithControllers));
   }
-
-  //*********************************************************************************************************************************************************
-  //                                                                                                                                                        *
-  //                                                    CARD TEMPLATE SETTINGS AND FUNCTIONS                                                                *
-  //                                                                                                                                                        *
-  //*********************************************************************************************************************************************************
-
-  void fairForCustomer() {
-    print("FAİR FOR CUSTOMER");
-    final List<String> templateList = [
-      "Fuarın Adı",
-      "Şirketin Adı",
-      "Görüştüğünüz Kişinin Adı",
-      "İlgilendiğiniz Ürünler",
-    ];
-    cleartextfieldListwithControllers();
-    for (String title in templateList) {
-      print(title);
-
-      addnewElement(title);
-    }
-  }
 }
 
 abstract class NewRegState {}

@@ -2,13 +2,14 @@ import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
 class DesignedCard extends StatelessWidget {
-  const DesignedCard(
-      {super.key,
-      this.imageName = "assets/images/cardimages/business-goal.png",
-      this.onTap,
-      this.titleName = "No name field"});
+  const DesignedCard({
+    super.key,
+    this.backGroundColor,
+    this.onTap,
+    this.titleName = "No name field",
+  });
   //Variables
-  final String imageName;
+  final Color? backGroundColor;
   final String titleName;
   final void Function()? onTap;
 
@@ -17,39 +18,25 @@ class DesignedCard extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
-      margin: EdgeInsets.only(top: height * 0.01),
-      height: height * 0.3,
-      width: width * 0.45,
-      child: Card(
-          clipBehavior: Clip.hardEdge,
-          shadowColor: kcPrimaryCascadeTwilight,
+        margin: EdgeInsets.symmetric(horizontal: width * 0.02),
+        height: height * 0.1,
+        child: Card(
+          elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          elevation: 20,
+          shadowColor: kcPrimaryCascadeTwilight,
+          color: backGroundColor,
           child: InkWell(
             onTap: onTap,
-            child: Column(children: [
-              Expanded(
-                  flex: 8,
-                  child: Image.asset(
-                    imageName,
-                    fit: BoxFit.contain,
-                  )),
-              Expanded(
-                  flex: 2,
-                  child: Container(
-                    height: height,
-                    width: width,
-                    color: kc3thColor,
-                    child: Center(
-                        child: Text(
-                      titleName,
-                      style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                          color: kcwhite, fontWeight: FontWeight.normal),
-                    )),
-                  ))
-            ]),
-          )),
-    );
+            child: Center(
+                child: Text(
+              titleName,
+              style: Theme.of(context).textTheme.headline6?.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal,
+                  ),
+            )),
+          ),
+        ));
   }
 }

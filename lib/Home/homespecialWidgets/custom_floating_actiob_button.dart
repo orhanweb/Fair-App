@@ -30,8 +30,8 @@ class CustomFloatingActionButtons extends StatelessWidget {
           BlocBuilder<NewRegCubit, NewRegState>(
             builder: (context, state) {
               return FloatingActionButton(
-                onPressed: context.read<NewRegCubit>().fairForCustomer,
-                //     showDialog(context: context, builder: mycustomDialog),
+                onPressed: () =>
+                    showDialog(context: context, builder: mycustomDialog),
                 backgroundColor: kcPrimaryCascadeTwilight,
                 child: const Icon(Icons.add),
               );
