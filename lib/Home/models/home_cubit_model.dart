@@ -18,12 +18,12 @@ class NewRegCubit extends Cubit<NewRegState> {
   void addnewElement(String text) {
     final TextEditingController controller = TextEditingController();
     final List newElementList = [];
-    print("huuuu");
+
     newElementList.add(controller);
     newElementList.add(newRegInputField(controller, text));
     newElementList.add(text);
     textfieldListwithControllers.add(newElementList);
-    print(textfieldListwithControllers);
+
     emit(NewReginitialize(
         textfieldListwithControllers: textfieldListwithControllers));
   }
