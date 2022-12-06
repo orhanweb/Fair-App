@@ -6,25 +6,16 @@ class CardListCubit extends Cubit<CardListState> {
       : super(CardListInitial(mainCardList: mainCardList));
 
   final List<List> mainCardList;
-  final NewRegCubit newregcubit = NewRegCubit(textfieldListwithControllers: []);
+  final NewRegCubit deneme = NewRegCubit(textfieldListwithControllers: []);
 
-  List addNewCard(
-      {required String imagePath,
-      required Function goWhere,
-      required String titleofCard}) {
-    final List oneCardMade = [];
+  void addNewCardToCardList(
+      {required String titleName, required List<String> elements}) {
+    final List addCardFeatures = [];
 
-    oneCardMade.add(imagePath);
-    oneCardMade.add(titleofCard);
-
-    //newregcubit.cleartextfieldListwithControllers();
-    // for (var titlename in titleofInputs) {
-    //   newregcubit.addnewElement(titlename);
-    // }
-
-    return oneCardMade;
-
-    //newregcubit.addnewElement("");
+    addCardFeatures.add(titleName);
+    addCardFeatures.add(elements);
+    mainCardList.add(addCardFeatures);
+    emit(CardListInitial(mainCardList: mainCardList));
   }
 }
 
