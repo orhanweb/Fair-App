@@ -48,6 +48,7 @@ dev_dependencies:
   flutter_keyboard_visibility: ^5.4.0
   get: ^4.6.5
   equatable: ^2.0.5
+  flutter_expandable_fab: ^1.6.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

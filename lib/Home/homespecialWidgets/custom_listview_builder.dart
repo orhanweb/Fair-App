@@ -1,5 +1,5 @@
+import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
 import 'package:fair_app/Home/models/home_cubit_model.dart';
-import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,37 +10,27 @@ class MyListViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return BlocBuilder<NewRegCubit, NewRegState>(
       builder: (context, state) {
         return state is NewReginitialize &&
                 state.textfieldListwithControllers.isNotEmpty
-            ? ListView.separated(
-                separatorBuilder: (context, index) => verticalSpaceTiny,
+            ? ReorderableListView.builder(
+                padding: EdgeInsets.only(top: height * 0.01),
+                //separatorBuilder: (context, index) => verticalSpaceTiny,
                 physics: const BouncingScrollPhysics(),
                 itemCount: state.textfieldListwithControllers.length,
                 itemBuilder: (context, index) {
                   return state.textfieldListwithControllers[index][1];
                 },
+                onReorder: (oldIndex, newIndex) => context
+                    .read<NewRegCubit>()
+                    .onReorderNewReg(oldIndex, newIndex),
               )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Image.asset(
-                      width: width * 0.7,
-                      nolistimage,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  verticalSpaceTiny,
-                  Text(
-                    "Liste Boş",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        ?.copyWith(color: kcblack54),
-                  ),
-                ],
+            : NoDataColumn(
+                width: width,
+                nolistimagePath: nolistimage,
+                text: "Burası Çok Issız Yeni Alan Ekleyin",
               );
       },
     );

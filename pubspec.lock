@@ -209,6 +209,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.1.1"
+  flutter_expandable_fab:
+    dependency: "direct dev"
+    description:
+      name: flutter_expandable_fab
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.6.1"
   flutter_gen:
     dependency: "direct main"
     description:

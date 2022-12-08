@@ -133,9 +133,8 @@ Widget mycustomDialog(BuildContext context) {
             width: width * 0.3,
             ontap: () {
               if (dialogcontroller.text.isNotEmpty) {
-                context
-                    .read<NewRegCubit>()
-                    .addnewElement(dialogcontroller.text);
+                context.read<NewRegCubit>().addnewElement(
+                    text: dialogcontroller.text, context: context);
                 Navigator.pop(context, 'Ekle');
               } else {
                 mySnackBar(context, "Başlık alanı boş bırakılamaz");

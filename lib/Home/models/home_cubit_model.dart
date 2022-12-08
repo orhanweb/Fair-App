@@ -1,4 +1,5 @@
 import 'package:fair_app/Home/homespecialWidgets/newreg_input_field_widget.dart';
+import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_snack_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,13 @@ class NewRegCubit extends Cubit<NewRegState> {
   //////////////////////////////////////////////////////////
   //                  ADD NEW ELEMENT                     //
   //////////////////////////////////////////////////////////
-  void addnewElement(String text) {
+  void addnewElement({required String text, required BuildContext context}) {
     final TextEditingController controller = TextEditingController();
     final List newElementList = [];
 
     newElementList.add(controller);
-    newElementList.add(newRegInputField(controller, text));
+    newElementList.add(
+        newRegInputField(controller: controller, context: context, text: text));
     newElementList.add(text);
     textfieldListwithControllers.add(newElementList);
 
@@ -90,6 +92,16 @@ class NewRegCubit extends Cubit<NewRegState> {
 
   void cleartextfieldListwithControllers() {
     textfieldListwithControllers.clear();
+    emit(NewReginitialize(
+        textfieldListwithControllers: textfieldListwithControllers));
+  }
+
+  void onReorderNewReg(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final item = textfieldListwithControllers.removeAt(oldIndex);
+    textfieldListwithControllers.insert(newIndex, item);
     emit(NewReginitialize(
         textfieldListwithControllers: textfieldListwithControllers));
   }

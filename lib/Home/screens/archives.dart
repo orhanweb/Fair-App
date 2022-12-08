@@ -1,5 +1,5 @@
-import 'package:fair_app/shared/const.dart';
-import 'package:fair_app/shared/helpers.widget.dart';
+import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
+
 import 'package:flutter/material.dart';
 
 class Archives extends StatelessWidget {
@@ -12,26 +12,10 @@ class Archives extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              width: width * 0.7,
-              noRegImage,
-              fit: BoxFit.contain,
-            ),
-          ),
-          verticalSpaceTiny,
-          Text(
-            "Hiç kayıt oluşturulmamış",
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(color: kcblack54),
-          ),
-        ],
-      ),
-    );
+        body: NoDataColumn(
+      width: width,
+      nolistimagePath: noRegImage,
+      text: "Hiç kayıt oluşturulmamış",
+    ));
   }
 }

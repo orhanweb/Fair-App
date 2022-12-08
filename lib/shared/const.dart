@@ -29,25 +29,24 @@ OutlineInputBorder myOutlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(20),
 );
 
+// My Rounded Rectangle Border
+const RoundedRectangleBorder myRoundedRectangleBorder =
+    RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20)));
+
 //ElevatedButton ReStyle
 final ButtonStyle customelevatedbuttomstyle = ElevatedButton.styleFrom(
-  shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(20))),
+  shape: myRoundedRectangleBorder,
   backgroundColor: kcPrimaryCascadeTwilight,
 );
 
 //OutlinedButton ReStyle
 final ButtonStyle customoutlinedbuttomstyle = OutlinedButton.styleFrom(
-  shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(20))),
+  shape: myRoundedRectangleBorder,
   backgroundColor: kcMediumGreyPalladium,
   side: myBorderSide,
 );
 
 // Input Border Style
-InputDecoration customhomeinputstyle(String text) {
-  return InputDecoration(
-      label: Text(text),
-      border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20))));
+InputDecoration customhomeinputstyle(String? text) {
+  return InputDecoration(label: Text(text ?? ""), border: myOutlineInputBorder);
 }

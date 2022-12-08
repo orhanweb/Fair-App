@@ -21,7 +21,7 @@ void mySnackBar(BuildContext context, String title) {
     ),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     elevation: 10,
-    duration: const Duration(milliseconds: 800),
+    duration: const Duration(seconds: 1),
     behavior: SnackBarBehavior.floating,
     backgroundColor: kcPrimaryCascadeTwilight,
   ));

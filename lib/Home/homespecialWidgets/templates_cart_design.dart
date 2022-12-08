@@ -18,8 +18,9 @@ class DesignedCard extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: width * 0.02),
-        height: height * 0.1,
+        margin: EdgeInsets.symmetric(
+            horizontal: width * 0.02, vertical: height * 0.007),
+        height: height * 0.11,
         child: Card(
           elevation: 10,
           shape:
