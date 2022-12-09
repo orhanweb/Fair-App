@@ -1,7 +1,17 @@
+import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
-Widget floatingActionButton() {
+Widget myfloatingActionButton(
+    {required IconData icon,
+    void Function()? onPressed,
+    Object? heroTag,
+    String? toolTip,
+    Color? backColor}) {
   return FloatingActionButton(
-    onPressed: () {},
+    heroTag: heroTag,
+    backgroundColor: backColor ?? kcPrimaryCascadeTwilight,
+    onPressed: onPressed,
+    tooltip: toolTip,
+    child: Icon(icon, size: 30),
   );
 }

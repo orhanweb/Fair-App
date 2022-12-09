@@ -45,14 +45,15 @@ class NewRegCubit extends Cubit<NewRegState> {
         }
       }
       if (bosmu == textfieldListwithControllers.length) {
-        mySnackBar(contextforSnackBar, "Oluşturulan liste boş");
+        mySnackBar(context: contextforSnackBar, title: "Oluşturulan liste boş");
       } else {
         for (var i = 0; i < textfieldListwithControllers.length; i++) {
           if (textfieldListwithControllers[i][0].text.isEmpty) {
             if (!isShowSnackBar) {
               isShowSnackBar = true;
-              mySnackBar(contextforSnackBar,
-                  "Boş bırakılan alanlar dikkate alınmadı!");
+              mySnackBar(
+                  context: contextforSnackBar,
+                  title: "Boş alanlar dikkate alınmadı!");
             }
             continue;
           }
@@ -71,12 +72,15 @@ class NewRegCubit extends Cubit<NewRegState> {
                 .set(sendtoFireStore)
                 .then(
               (value) {
-                mySnackBar(contextforSnackBar, "Başarıyla Gönderildi");
+                mySnackBar(
+                    context: contextforSnackBar, title: "Başarıyla Gönderildi");
               },
             );
           } on FirebaseException {
-            mySnackBar(contextforSnackBar,
-                "Kaydınız Gönderilirken Bir Sorun Oluştu Lütfen Tekrar Deneyiniz");
+            mySnackBar(
+                context: contextforSnackBar,
+                title:
+                    "Kaydınız Gönderilirken Bir Sorun Oluştu Lütfen Tekrar Deneyiniz");
           }
         }
       }
@@ -84,7 +88,7 @@ class NewRegCubit extends Cubit<NewRegState> {
       emit(NewReginitialize(
           textfieldListwithControllers: textfieldListwithControllers));
     } else {
-      mySnackBar(contextforSnackBar, "Boş Liste Gönderilemez");
+      mySnackBar(context: contextforSnackBar, title: "Boş Liste Gönderilemez");
     }
   }
 

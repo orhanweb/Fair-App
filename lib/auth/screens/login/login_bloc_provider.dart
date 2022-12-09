@@ -29,15 +29,19 @@ class LoginBlocPattern extends StatelessWidget {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is UserDisabled) {
-              mySnackBar(context,
-                  "Bu e posta sistem tarafından geçersiz kılınmıştır.");
+              mySnackBar(
+                  context: context,
+                  title: "Bu e posta sistem tarafından geçersiz kılınmıştır.");
             } else if (state is UserNotFound) {
-              mySnackBar(context, "Bu kullanıcı adı ile hesap oluşturulmamış.");
+              mySnackBar(
+                  context: context,
+                  title: "Bu kullanıcı adı ile hesap oluşturulmamış.");
             } else if (state is WrongPassword) {
-              mySnackBar(context, "Şifrenizi yanlış girdiniz.");
+              mySnackBar(context: context, title: "Şifrenizi yanlış girdiniz.");
             }
             if (state is Fail) {
-              mySnackBar(context, "Lütfen tüm alanları doldurun");
+              mySnackBar(
+                  context: context, title: "Lütfen tüm alanları doldurun");
             }
           },
           builder: (context, state) {

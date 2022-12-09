@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  const CustomElevatedButton(
-      {super.key,
-      required this.title,
-      this.ontap,
-      required this.height,
-      required this.width,
-      this.style});
+  const CustomElevatedButton({
+    super.key,
+    required this.title,
+    this.ontap,
+    required this.height,
+    required this.width,
+    this.backColor,
+  });
 
   final double height;
   final double width;
 
   final void Function()? ontap;
   final Widget title;
-  final ButtonStyle? style;
+  final Color? backColor;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,10 @@ class CustomElevatedButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         onPressed: ontap,
-        style: style ?? customelevatedbuttomstyle,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backColor ?? kcPrimaryCascadeTwilight,
+          shape: myRoundedRectangleBorder,
+        ),
         child: title,
       ),
     );
@@ -33,19 +37,21 @@ class CustomElevatedButton extends StatelessWidget {
 }
 
 class CustomOutlinedButton extends StatelessWidget {
-  CustomOutlinedButton(
-      {super.key,
-      required this.title,
-      this.ontap,
-      required this.height,
-      required this.width});
+  const CustomOutlinedButton({
+    super.key,
+    required this.title,
+    this.ontap,
+    required this.height,
+    required this.width,
+    this.backColor,
+  });
 
   final double height;
   final double width;
 
   final void Function()? ontap;
   final Widget title;
-  final ButtonStyle _style = customoutlinedbuttomstyle;
+  final Color? backColor;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +60,10 @@ class CustomOutlinedButton extends StatelessWidget {
       width: width,
       child: OutlinedButton(
         onPressed: ontap,
-        style: _style,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backColor ?? kcPrimaryCascadeTwilight,
+          shape: myRoundedRectangleBorder,
+        ),
         child: title,
       ),
     );

@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:fair_app/Home/models/home_card_list_cubit.dart';
-import 'package:fair_app/Home/models/home_cubit_model.dart';
+import 'package:fair_app/Home/models/home_templates_cubit.dart';
+import 'package:fair_app/Home/models/home_newreg_model.dart';
 import 'package:fair_app/Home/screens/home.dart';
 
 import 'package:fair_app/firebase_options.dart';

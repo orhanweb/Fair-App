@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 const Color kcPrimaryCascadeTwilight = Color(0xff0867e2);
 const Color kcSecondaryColor = Color(0xff8CBBF1);
 const Color kc3thColor = Color.fromARGB(255, 23, 82, 150);
-
 const Color kcMediumGreyPalladium = Color.fromARGB(255, 243, 243, 243);
+const Color kcGrey = Color.fromARGB(253, 196, 196, 196);
+const Color kcDangerZone = Color.fromARGB(255, 221, 47, 47);
+
 const Color kcblack38 = Colors.black38;
 const Color kcblack45 = Colors.black45;
 const Color kcblack54 = Colors.black54;

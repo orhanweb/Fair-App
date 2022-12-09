@@ -1,5 +1,5 @@
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
-import 'package:fair_app/Home/models/home_cubit_model.dart';
+import 'package:fair_app/Home/models/home_newreg_model.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

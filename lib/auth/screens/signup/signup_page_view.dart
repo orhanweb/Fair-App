@@ -58,6 +58,7 @@ class SignupPageView extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(top: height * 0.45),
           child: CustomElevatedButton(
+            backColor: kcPrimaryCascadeTwilight,
             height: height * 0.07,
             width: width * 0.9,
             title: (state is Loading)

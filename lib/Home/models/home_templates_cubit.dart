@@ -51,19 +51,19 @@ class CardListCubit extends Cubit<CardListState> {
         }
       }
       if (isAllEmpy == instanceofCreateNewCard.createNewCardElements.length) {
-        mySnackBar(context, "En az 1 alan doldurmalısınız.");
+        mySnackBar(context: context, title: "En az 1 alan doldurmalısınız.");
       } else {
         if (isemptyBox) {
-          mySnackBar(context, "Boş Alanlar Dikkate Alınmadı");
+          mySnackBar(context: context, title: "Boş Alanlar Dikkate Alınmadı");
         }
-        mySnackBar(context, "Şablon Kaydedildi");
+        mySnackBar(context: context, title: "Şablon Kaydedildi");
         deleteOldCardInfo();
         addNewCardToCardList(titleName: templateName, elements: elements);
 
         Navigator.pop(context);
       }
     } else {
-      mySnackBar(context, "En az 1 alan girip doldurmalısınız");
+      mySnackBar(context: context, title: "En az 1 alan girip doldurmalısınız");
     }
   }
 

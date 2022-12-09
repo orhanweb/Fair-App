@@ -35,6 +35,7 @@ class MyAuthLayout extends StatelessWidget {
             TopTextWidget(title: _mainTitle),
             verticalSpaceSmall,
             CustomElevatedButton(
+              backColor: kcPrimaryCascadeTwilight,
               title: Text(
                 _signupText,
                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
@@ -50,6 +51,7 @@ class MyAuthLayout extends StatelessWidget {
             ),
             verticalSpaceTiny,
             CustomOutlinedButton(
+              backColor: kcPrimaryCascadeTwilight,
               title: Text(
                 _signinText,
                 style: Theme.of(context).textTheme.subtitle1?.copyWith(

@@ -1,8 +1,7 @@
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
-import 'package:fair_app/Home/models/home_card_list_cubit.dart';
+import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/shared/const.dart';
-import 'package:fair_app/shared/helpers.widget.dart';
-import 'package:fair_app/widgets/custom_buttons.dart';
+import 'package:fair_app/widgets/custom_FAB.dart';
 import 'package:fair_app/widgets/custom_snack_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -49,29 +48,59 @@ class NewCardCreateView extends StatelessWidget {
               },
             ),
             floatingActionButtonLocation: ExpandableFab.location,
-            floatingActionButton: ExpandableFab(
-                distance: 70,
-                backgroundColor: kcPrimaryCascadeTwilight,
-                closeButtonStyle: const ExpandableFabCloseButtonStyle(
+            floatingActionButton: BlocBuilder<CardListCubit, CardListState>(
+              builder: (context, state) {
+                return ExpandableFab(
+                    openButtonHeroTag: "eeee",
+                    distance: 70,
+                    onOpen: () {
+                      mySnackBar(context: context, title: "girdi");
+                    },
                     backgroundColor: kcPrimaryCascadeTwilight,
+                    closeButtonStyle: ExpandableFabCloseButtonStyle(
+                        backgroundColor: kcDangerZone,
+                        foregroundColor: kcwhite,
+                        child: Icon(
+                          Icons.more_vert_outlined,
+                          size: width * 0.11,
+                        )),
+                    type: ExpandableFabType.up,
                     child: Icon(
-                      Icons.keyboard_double_arrow_down_outlined,
-                    )),
-                type: ExpandableFabType.up,
-                child: Icon(
-                  Icons.more_horiz_outlined,
-                  size: width * 0.11,
-                ),
-                children: [
-                  FloatingActionButton(
-                    child: const Icon(Icons.edit),
-                    onPressed: () {},
-                  ),
-                  FloatingActionButton(
-                    child: const Icon(Icons.search),
-                    onPressed: () {},
-                  ),
-                ]),
+                      Icons.more_horiz_outlined,
+                      size: width * 0.11,
+                    ),
+                    children: [
+                      myfloatingActionButton(
+                        heroTag: "1",
+                        icon: Icons.edit,
+                        toolTip: "Yeni Alan Ekleyin",
+                        onPressed: () {
+                          context
+                              .read<CardListCubit>()
+                              .addField(context: context);
+                        },
+                      ),
+                      myfloatingActionButton(
+                        heroTag: "2",
+                        icon: Icons.save,
+                        toolTip: "Şablonu Kaydedin",
+                        onPressed: () {
+                          if (templateName.text.isNotEmpty &&
+                              state is CreateNewCardElements) {
+                            context.read<CardListCubit>().saveTheNewCard(
+                                context: context,
+                                templateName: templateName.text);
+                          } else {
+                            mySnackBar(
+                                key: ValueKey(templateName.text),
+                                context: context,
+                                title: "Şablon Adı Boş Bırakılamaz");
+                          }
+                        },
+                      )
+                    ]);
+              },
+            ),
           ),
         );
       },
@@ -142,55 +171,6 @@ class MyCustomListWidget extends StatelessWidget {
         ),
         Expanded(flex: 1, child: Container())
       ],
-    );
-  }
-}
-
-class MyFloatingButtons extends StatelessWidget {
-  const MyFloatingButtons({
-    Key? key,
-    required this.height,
-    required this.width,
-    required this.templateName,
-  }) : super(key: key);
-
-  final double height;
-  final double width;
-  final TextEditingController templateName;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CardListCubit, CardListState>(
-      builder: (context, state) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            CustomElevatedButton(
-              title: const Text("Şablonu Kaydet"),
-              height: height * 0.08,
-              width: width * 0.5,
-              ontap: () {
-                if (templateName.text.isNotEmpty &&
-                    state is CreateNewCardElements) {
-                  context.read<CardListCubit>().saveTheNewCard(
-                      context: context, templateName: templateName.text);
-                } else {
-                  mySnackBar(context, "Şablon Adı Boş Bırakılamaz");
-                }
-              },
-            ),
-            horizontalSpaceTiny,
-            FloatingActionButton(
-              backgroundColor: kcPrimaryCascadeTwilight,
-              onPressed: () {
-                context.read<CardListCubit>().addField(context: context);
-              },
-              child: const Icon(Icons.add),
-            ),
-            horizontalSpaceTiny,
-          ],
-        );
-      },
     );
   }
 }

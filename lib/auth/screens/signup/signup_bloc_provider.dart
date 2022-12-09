@@ -31,14 +31,16 @@ class SignupBlocProvider extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is EmailAlreadyUse) {
-            mySnackBar(context, "Girdiğiniz mail zaten kullanılıyor.");
+            mySnackBar(
+                context: context, title: "Girdiğiniz mail zaten kullanılıyor.");
           } else if (state is InvalidEmail) {
-            mySnackBar(context, "Lütfen geçerli bir Mail giriniz");
+            mySnackBar(
+                context: context, title: "Lütfen geçerli bir Mail giriniz");
           } else if (state is UserNameAlreadyUse) {
-            mySnackBar(context, "Bu Kullanıcı adı alınmış.");
+            mySnackBar(context: context, title: "Bu Kullanıcı adı alınmış.");
           }
           if (state is Fail) {
-            mySnackBar(context, "Lütfen tüm alanları doldurun");
+            mySnackBar(context: context, title: "Lütfen tüm alanları doldurun");
           }
         },
         builder: (context, state) {

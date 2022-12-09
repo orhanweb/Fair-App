@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 //////////////////////////////////////////////////////////
 //                    CUSTOM SNACKBAR                   //
 //////////////////////////////////////////////////////////
-void mySnackBar(BuildContext context, String title) {
-  double height = MediaQuery.of(context).size.height;
-  double width = MediaQuery.of(context).size.width;
+void mySnackBar(
+    {required BuildContext context, required String title, Key? key}) {
+  // double height = MediaQuery.of(context).size.height;
+  // double width = MediaQuery.of(context).size.width;
+  print("heh");
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    key: key,
     content: Row(
       children: [
         const Icon(
@@ -16,7 +19,11 @@ void mySnackBar(BuildContext context, String title) {
           color: kcMediumGreyPalladium,
         ),
         const HorizontalSpacers(boyut: 0.02),
-        Text(title)
+        Text(
+          title,
+          style:
+              Theme.of(context).textTheme.subtitle1?.copyWith(color: kcwhite),
+        )
       ],
     ),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

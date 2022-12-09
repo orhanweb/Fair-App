@@ -1,8 +1,8 @@
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
 import 'package:fair_app/Home/homespecialWidgets/templates_cart_design.dart';
-import 'package:fair_app/Home/models/home_card_list_cubit.dart';
-import 'package:fair_app/Home/models/home_cubit_model.dart';
-import 'package:fair_app/Home/screens/new_card_create_view.dart';
+import 'package:fair_app/Home/models/home_templates_cubit.dart';
+import 'package:fair_app/Home/models/home_newreg_model.dart';
+import 'package:fair_app/Home/screens/new_template_create_view.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +58,7 @@ class TemplatesView extends StatelessWidget {
       floatingActionButton: BlocBuilder<CardListCubit, CardListState>(
         builder: (context, state) {
           return CustomElevatedButton(
+            backColor: kcPrimaryCascadeTwilight,
             title: const Text("Yeni Şablon Oluştur"),
             height: height * 0.08,
             width: width * 0.5,

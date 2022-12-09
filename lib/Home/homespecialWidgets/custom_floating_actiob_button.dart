@@ -1,4 +1,4 @@
-import 'package:fair_app/Home/models/home_cubit_model.dart';
+import 'package:fair_app/Home/models/home_newreg_model.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
@@ -79,6 +79,7 @@ Widget mycustomBottomSheet(BuildContext context) {
         BlocBuilder<NewRegCubit, NewRegState>(
           builder: (context, state) {
             return CustomElevatedButton(
+              backColor: kcPrimaryCascadeTwilight,
               title:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 const Icon(Icons.cloud_upload_outlined),
@@ -120,6 +121,7 @@ Widget mycustomDialog(BuildContext context) {
         decoration: customhomeinputstyle("Alanın Başlığı")),
     actions: [
       CustomElevatedButton(
+        backColor: kcDangerZone,
         title: const Text("İptal et"),
         height: height * 0.07,
         width: width * 0.3,
@@ -128,6 +130,7 @@ Widget mycustomDialog(BuildContext context) {
       BlocBuilder<NewRegCubit, NewRegState>(
         builder: (context, state) {
           return CustomElevatedButton(
+            backColor: kcPrimaryCascadeTwilight,
             title: const Text("Ekle"),
             height: height * 0.07,
             width: width * 0.3,
@@ -137,7 +140,8 @@ Widget mycustomDialog(BuildContext context) {
                     text: dialogcontroller.text, context: context);
                 Navigator.pop(context, 'Ekle');
               } else {
-                mySnackBar(context, "Başlık alanı boş bırakılamaz");
+                mySnackBar(
+                    context: context, title: "Başlık alanı boş bırakılamaz");
               }
             },
           );
