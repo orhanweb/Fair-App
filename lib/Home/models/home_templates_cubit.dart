@@ -1,5 +1,6 @@
 import 'package:fair_app/Home/homespecialWidgets/newreg_input_field_widget.dart';
-import 'package:fair_app/widgets/custom_snack_bar.dart';
+import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -51,19 +52,39 @@ class CardListCubit extends Cubit<CardListState> {
         }
       }
       if (isAllEmpy == instanceofCreateNewCard.createNewCardElements.length) {
-        mySnackBar(context: context, title: "En az 1 alan doldurmalısınız.");
+        myCoolSnackBar(
+            color: kcDangerZone,
+            icon: Icons.warning_amber_rounded,
+            title: "Uyarı!",
+            description: "En az 1 alan doldurmalısınız.",
+            textTheme: Theme.of(context).textTheme);
       } else {
         if (isemptyBox) {
-          mySnackBar(context: context, title: "Boş Alanlar Dikkate Alınmadı");
+          myCoolSnackBar(
+              color: kcDangerZone,
+              icon: Icons.warning_amber_rounded,
+              title: "Uyarı!",
+              description: "Boş Alanlar Dikkate Alınmadı",
+              textTheme: Theme.of(context).textTheme);
         }
-        mySnackBar(context: context, title: "Şablon Kaydedildi");
+        myCoolSnackBar(
+            color: kcParisGreen,
+            icon: Icons.download_done_outlined,
+            title: "Güzel Haber!",
+            description: "Şablon Kaydedildi",
+            textTheme: Theme.of(context).textTheme);
         deleteOldCardInfo();
         addNewCardToCardList(titleName: templateName, elements: elements);
 
         Navigator.pop(context);
       }
     } else {
-      mySnackBar(context: context, title: "En az 1 alan girip doldurmalısınız");
+      myCoolSnackBar(
+          color: kcDangerZone,
+          icon: Icons.warning_amber_rounded,
+          title: "Uyarı!",
+          description: "En az 1 alan girip doldurmalısınız",
+          textTheme: Theme.of(context).textTheme);
     }
   }
 

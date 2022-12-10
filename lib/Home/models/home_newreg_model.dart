@@ -1,6 +1,6 @@
 import 'package:fair_app/Home/homespecialWidgets/newreg_input_field_widget.dart';
 import 'package:fair_app/shared/const.dart';
-import 'package:fair_app/widgets/custom_snack_bar.dart';
+import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,15 +45,23 @@ class NewRegCubit extends Cubit<NewRegState> {
         }
       }
       if (bosmu == textfieldListwithControllers.length) {
-        mySnackBar(context: contextforSnackBar, title: "Oluşturulan liste boş");
+        myCoolSnackBar(
+            color: kcDangerZone,
+            icon: Icons.warning_amber_rounded,
+            title: "Uyarı!",
+            description: "Oluşturulan liste boş",
+            textTheme: Theme.of(contextforSnackBar).textTheme);
       } else {
         for (var i = 0; i < textfieldListwithControllers.length; i++) {
           if (textfieldListwithControllers[i][0].text.isEmpty) {
             if (!isShowSnackBar) {
               isShowSnackBar = true;
-              mySnackBar(
-                  context: contextforSnackBar,
-                  title: "Boş alanlar dikkate alınmadı!");
+              myCoolSnackBar(
+                  color: kcDangerZone,
+                  icon: Icons.warning_amber_rounded,
+                  title: "Uyarı!",
+                  description: "Boş alanlar dikkate alınmadı",
+                  textTheme: Theme.of(contextforSnackBar).textTheme);
             }
             continue;
           }
@@ -72,15 +80,22 @@ class NewRegCubit extends Cubit<NewRegState> {
                 .set(sendtoFireStore)
                 .then(
               (value) {
-                mySnackBar(
-                    context: contextforSnackBar, title: "Başarıyla Gönderildi");
+                myCoolSnackBar(
+                    color: kcParisGreen,
+                    icon: Icons.download_done_outlined,
+                    title: "Güzel Haber!",
+                    description: "Başarıyla Gönderildi",
+                    textTheme: Theme.of(contextforSnackBar).textTheme);
               },
             );
           } on FirebaseException {
-            mySnackBar(
-                context: contextforSnackBar,
-                title:
-                    "Kaydınız Gönderilirken Bir Sorun Oluştu Lütfen Tekrar Deneyiniz");
+            myCoolSnackBar(
+                color: kcDangerZone,
+                icon: Icons.warning_amber_rounded,
+                title: "Uyarı!",
+                description:
+                    "Kaydınız Gönderilirken Bir Sorun Oluştu Lütfen Tekrar Deneyiniz",
+                textTheme: Theme.of(contextforSnackBar).textTheme);
           }
         }
       }
@@ -88,7 +103,12 @@ class NewRegCubit extends Cubit<NewRegState> {
       emit(NewReginitialize(
           textfieldListwithControllers: textfieldListwithControllers));
     } else {
-      mySnackBar(context: contextforSnackBar, title: "Boş Liste Gönderilemez");
+      myCoolSnackBar(
+          color: kcDangerZone,
+          icon: Icons.warning_amber_rounded,
+          title: "Uyarı!",
+          description: "Boş Liste Gönderilemez",
+          textTheme: Theme.of(contextforSnackBar).textTheme);
     }
   }
 

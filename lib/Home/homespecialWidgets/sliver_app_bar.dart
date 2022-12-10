@@ -1,7 +1,7 @@
 import 'package:fair_app/Home/screens/profile.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:grock/grock.dart';
 
 class MySliverAppbar extends StatelessWidget {
   const MySliverAppbar({super.key, required this.username});
@@ -15,7 +15,7 @@ class MySliverAppbar extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(Profile(username: username));
+                Grock.to(Profile(username: username));
               },
               icon: const Icon(Icons.settings_sharp))
         ],

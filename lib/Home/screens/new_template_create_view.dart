@@ -2,7 +2,7 @@ import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_FAB.dart';
-import 'package:fair_app/widgets/custom_snack_bar.dart';
+import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -42,6 +42,7 @@ class NewCardCreateView extends StatelessWidget {
                             .onReorderCreateCardElements(oldIndex, newIndex),
                         builderList: state.createNewCardElements)
                     : NoDataColumn(
+                        height: height,
                         width: width,
                         nolistimagePath: nolistimagePath,
                         text: "Yeni Bir Alan Ekleyin");
@@ -51,23 +52,21 @@ class NewCardCreateView extends StatelessWidget {
             floatingActionButton: BlocBuilder<CardListCubit, CardListState>(
               builder: (context, state) {
                 return ExpandableFab(
-                    openButtonHeroTag: "eeee",
+                    openButtonHeroTag: "opening",
+                    closeButtonHeroTag: "closing",
                     distance: 70,
-                    onOpen: () {
-                      mySnackBar(context: context, title: "girdi");
-                    },
                     backgroundColor: kcPrimaryCascadeTwilight,
-                    closeButtonStyle: ExpandableFabCloseButtonStyle(
+                    closeButtonStyle: const ExpandableFabCloseButtonStyle(
                         backgroundColor: kcDangerZone,
                         foregroundColor: kcwhite,
                         child: Icon(
                           Icons.more_vert_outlined,
-                          size: width * 0.11,
+                          size: 40,
                         )),
                     type: ExpandableFabType.up,
-                    child: Icon(
+                    child: const Icon(
                       Icons.more_horiz_outlined,
-                      size: width * 0.11,
+                      size: 40,
                     ),
                     children: [
                       myfloatingActionButton(
@@ -91,10 +90,12 @@ class NewCardCreateView extends StatelessWidget {
                                 context: context,
                                 templateName: templateName.text);
                           } else {
-                            mySnackBar(
-                                key: ValueKey(templateName.text),
-                                context: context,
-                                title: "Şablon Adı Boş Bırakılamaz");
+                            myCoolSnackBar(
+                                color: kcDangerZone,
+                                icon: Icons.warning_amber_rounded,
+                                title: "Uyarı!",
+                                description: "Şablon Adı Girilmelidir",
+                                textTheme: Theme.of(context).textTheme);
                           }
                         },
                       )
@@ -174,3 +175,53 @@ class MyCustomListWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+// ExpandableDraggableFab(
+//                   distance: 70,
+//                   childrenCount: 2,
+//                   childrenType: ChildrenType.columnChildren,
+//                   childrenTransition: ChildrenTransition.scaleTransation,
+//                   childrenAlignment: Alignment.centerRight,
+//                   duration: const Duration(milliseconds: 300),
+//                   enableChildrenAnimation: false,
+//                   children: [
+//                     myfloatingActionButton(
+//                       heroTag: "1",
+//                       icon: Icons.edit,
+//                       toolTip: "Yeni Alan Ekleyin",
+//                       onPressed: () {
+//                         context
+//                             .read<CardListCubit>()
+//                             .addField(context: context);
+//                       },
+//                     ),
+//                     myfloatingActionButton(
+//                       heroTag: "2",
+//                       icon: Icons.save,
+//                       toolTip: "Şablonu Kaydedin",
+//                       onPressed: () {
+//                         if (templateName.text.isNotEmpty &&
+//                             state is CreateNewCardElements) {
+//                           context.read<CardListCubit>().saveTheNewCard(
+//                               context: context,
+//                               templateName: templateName.text);
+//                         } else {
+//                           myCoolSnackBar(
+//                               color: kcDangerZone,
+//                               icon: Icons.warning_amber_rounded,
+//                               title: "Uyarı!",
+//                               description: "Şablon Adı Girilmelidir",
+//                               textTheme: Theme.of(context).textTheme);
+//                         }
+//                       },
+//                     )
+//                   ],
+//                 );

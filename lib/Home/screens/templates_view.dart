@@ -7,7 +7,8 @@ import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+
+import 'package:grock/grock.dart';
 
 class TemplatesView extends StatelessWidget {
   const TemplatesView({Key? key}) : super(key: key);
@@ -47,6 +48,7 @@ class TemplatesView extends StatelessWidget {
                           .onReorderCardList(oldIndex, newIndex),
                     )
                   : NoDataColumn(
+                      height: height,
                       width: width,
                       nolistimagePath: noCardImage,
                       text: "Şablon Listeniz Boş",
@@ -60,10 +62,10 @@ class TemplatesView extends StatelessWidget {
           return CustomElevatedButton(
             backColor: kcPrimaryCascadeTwilight,
             title: const Text("Yeni Şablon Oluştur"),
-            height: height * 0.08,
-            width: width * 0.5,
+            height: height,
+            width: width * 0.55,
             ontap: () {
-              Get.to(NewCardCreateView());
+              Grock.to(NewCardCreateView());
             },
           );
         },

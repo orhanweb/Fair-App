@@ -1,7 +1,7 @@
-import 'package:fair_app/Home/screens/home.dart';
 import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/auth/screens/signup/signup_page_view.dart';
-import 'package:fair_app/widgets/custom_snack_bar.dart';
+import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/widgets/custom_my_snackbar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,16 +31,34 @@ class SignupBlocProvider extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is EmailAlreadyUse) {
-            mySnackBar(
-                context: context, title: "Girdiğiniz mail zaten kullanılıyor.");
+            myCoolSnackBar(
+                color: kcDangerZone,
+                icon: Icons.warning_amber_rounded,
+                title: "Uyarı!",
+                description: "Girdiğiniz mail zaten kullanılıyor.",
+                textTheme: Theme.of(context).textTheme);
           } else if (state is InvalidEmail) {
-            mySnackBar(
-                context: context, title: "Lütfen geçerli bir Mail giriniz");
+            myCoolSnackBar(
+                color: kcDangerZone,
+                icon: Icons.warning_amber_rounded,
+                title: "Uyarı!",
+                description: "Lütfen geçerli bir Mail giriniz",
+                textTheme: Theme.of(context).textTheme);
           } else if (state is UserNameAlreadyUse) {
-            mySnackBar(context: context, title: "Bu Kullanıcı adı alınmış.");
+            myCoolSnackBar(
+                color: kcDangerZone,
+                icon: Icons.warning_amber_rounded,
+                title: "Uyarı!",
+                description: "Bu Kullanıcı adı alınmış.",
+                textTheme: Theme.of(context).textTheme);
           }
           if (state is Fail) {
-            mySnackBar(context: context, title: "Lütfen tüm alanları doldurun");
+            myCoolSnackBar(
+                color: kcDangerZone,
+                icon: Icons.warning_amber_rounded,
+                title: "Uyarı!",
+                description: "Lütfen tüm alanları doldurun",
+                textTheme: Theme.of(context).textTheme);
           }
         },
         builder: (context, state) {

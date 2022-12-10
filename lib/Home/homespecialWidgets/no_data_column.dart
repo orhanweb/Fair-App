@@ -6,11 +6,13 @@ class NoDataColumn extends StatelessWidget {
   const NoDataColumn({
     Key? key,
     required this.width,
+    required this.height,
     required this.nolistimagePath,
     this.text,
   }) : super(key: key);
 
   final double width;
+  final double height;
   final String nolistimagePath;
   final String? text;
   @override
@@ -20,7 +22,7 @@ class NoDataColumn extends StatelessWidget {
       children: [
         Center(
           child: Image.asset(
-            width: width * 0.7,
+            width: width * 0.7 < height ? width * 0.6 : height * 0.6,
             nolistimagePath,
             fit: BoxFit.contain,
           ),

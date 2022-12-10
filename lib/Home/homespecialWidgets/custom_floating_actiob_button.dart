@@ -3,7 +3,8 @@ import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
 import 'package:fair_app/widgets/custom_divider.dart';
-import 'package:fair_app/widgets/custom_snack_bar.dart';
+import 'package:fair_app/widgets/custom_my_snackbar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,6 +31,7 @@ class CustomFloatingActionButtons extends StatelessWidget {
           BlocBuilder<NewRegCubit, NewRegState>(
             builder: (context, state) {
               return FloatingActionButton(
+                heroTag: "Add",
                 onPressed: () =>
                     showDialog(context: context, builder: mycustomDialog),
                 backgroundColor: kcPrimaryCascadeTwilight,
@@ -41,6 +43,7 @@ class CustomFloatingActionButtons extends StatelessWidget {
           BlocBuilder<NewRegCubit, NewRegState>(
             builder: (context, state) {
               return FloatingActionButton(
+                heroTag: "SendToCloud",
                 onPressed: () {
                   context.read<NewRegCubit>().writetoFirebase(context);
                 },
@@ -95,7 +98,6 @@ Widget mycustomBottomSheet(BuildContext context) {
               height: height * 0.07,
               width: width * 0.5,
               ontap: () {
-                print("Clouda Gönder");
                 context.read<NewRegCubit>().writetoFirebase(context);
               },
             );
@@ -107,9 +109,9 @@ Widget mycustomBottomSheet(BuildContext context) {
 }
 
 ///  DIALOG NEW SPACE
-Widget mycustomDialog(BuildContext context) {
-  double width = MediaQuery.of(context).size.width;
-  double height = MediaQuery.of(context).size.height;
+Widget mycustomDialog(BuildContext buttoncontext) {
+  double width = MediaQuery.of(buttoncontext).size.width;
+  double height = MediaQuery.of(buttoncontext).size.height;
   TextEditingController dialogcontroller = TextEditingController();
   return AlertDialog(
     shape: const RoundedRectangleBorder(
@@ -124,8 +126,8 @@ Widget mycustomDialog(BuildContext context) {
         backColor: kcDangerZone,
         title: const Text("İptal et"),
         height: height * 0.07,
-        width: width * 0.3,
-        ontap: () => Navigator.pop(context, 'İptal Et'),
+        width: width * 0.3 > 200 ? 200 : width * 0.3,
+        ontap: () => Navigator.pop(buttoncontext, 'İptal Et'),
       ),
       BlocBuilder<NewRegCubit, NewRegState>(
         builder: (context, state) {
@@ -133,15 +135,19 @@ Widget mycustomDialog(BuildContext context) {
             backColor: kcPrimaryCascadeTwilight,
             title: const Text("Ekle"),
             height: height * 0.07,
-            width: width * 0.3,
+            width: width * 0.3 > 200 ? 200 : width * 0.3,
             ontap: () {
               if (dialogcontroller.text.isNotEmpty) {
                 context.read<NewRegCubit>().addnewElement(
-                    text: dialogcontroller.text, context: context);
+                    text: dialogcontroller.text, context: buttoncontext);
                 Navigator.pop(context, 'Ekle');
               } else {
-                mySnackBar(
-                    context: context, title: "Başlık alanı boş bırakılamaz");
+                myCoolSnackBar(
+                    color: kcDangerZone,
+                    icon: Icons.warning_amber_rounded,
+                    title: "Uyarı!",
+                    description: "Başlık alanı boş bırakılamaz",
+                    textTheme: Theme.of(context).textTheme);
               }
             },
           );

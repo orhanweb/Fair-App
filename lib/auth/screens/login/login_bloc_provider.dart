@@ -1,10 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'package:fair_app/Home/screens/home.dart';
 import 'package:fair_app/auth/models/login_model.dart';
 import 'package:fair_app/auth/screens/login/login_page_view.dart';
-import 'package:fair_app/widgets/custom_snack_bar.dart';
-
-import 'package:get/get.dart';
+import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/widgets/custom_my_snackbar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,19 +27,34 @@ class LoginBlocPattern extends StatelessWidget {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state is UserDisabled) {
-              mySnackBar(
-                  context: context,
-                  title: "Bu e posta sistem tarafından geçersiz kılınmıştır.");
+              myCoolSnackBar(
+                  icon: Icons.warning_amber_rounded,
+                  title: "Uyarı!",
+                  color: kcDangerZone,
+                  description: "Bu e posta sistem tarafından engellenmiştir.",
+                  textTheme: Theme.of(context).textTheme);
             } else if (state is UserNotFound) {
-              mySnackBar(
-                  context: context,
-                  title: "Bu kullanıcı adı ile hesap oluşturulmamış.");
+              myCoolSnackBar(
+                  icon: Icons.warning_amber_rounded,
+                  title: "Uyarı!",
+                  color: kcDangerZone,
+                  description: "Bu kullanıcı adı ile hesap oluşturulmamış.",
+                  textTheme: Theme.of(context).textTheme);
             } else if (state is WrongPassword) {
-              mySnackBar(context: context, title: "Şifrenizi yanlış girdiniz.");
+              myCoolSnackBar(
+                  icon: Icons.warning_amber_rounded,
+                  title: "Uyarı!",
+                  color: kcDangerZone,
+                  description: "Şifrenizi yanlış girdiniz.",
+                  textTheme: Theme.of(context).textTheme);
             }
             if (state is Fail) {
-              mySnackBar(
-                  context: context, title: "Lütfen tüm alanları doldurun");
+              myCoolSnackBar(
+                  icon: Icons.warning_amber_rounded,
+                  title: "Uyarı!",
+                  color: kcDangerZone,
+                  description: "Lütfen tüm alanları doldurun",
+                  textTheme: Theme.of(context).textTheme);
             }
           },
           builder: (context, state) {

@@ -1,6 +1,7 @@
 import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import 'package:grock/grock.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
@@ -22,8 +23,8 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
-      width: width,
+      height: 700 < height ? height * 0.07 : 50,
+      width: width - 300 < height ? width * 0.9 : 800,
       child: ElevatedButton(
         onPressed: ontap,
         style: ElevatedButton.styleFrom(
@@ -56,12 +57,12 @@ class CustomOutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
-      width: width,
+      height: 700 < height ? height * 0.07 : 50,
+      width: width - 300 < height ? width * 0.9 : 800,
       child: OutlinedButton(
         onPressed: ontap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backColor ?? kcPrimaryCascadeTwilight,
+          backgroundColor: backColor ?? kcblack54,
           shape: myRoundedRectangleBorder,
         ),
         child: title,
@@ -81,7 +82,7 @@ class BackButtonWidget extends StatelessWidget {
       alignment: Alignment.topLeft,
       child: IconButton(
           onPressed: () {
-            Get.back();
+            Grock.back();
           },
           icon: const Icon(Icons.arrow_back_ios_rounded)),
     );

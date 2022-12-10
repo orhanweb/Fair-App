@@ -7,7 +7,7 @@ import 'package:fair_app/widgets/top_text_widget.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
+import 'package:grock/grock.dart';
 
 class MyAuthLayout extends StatelessWidget {
   const MyAuthLayout({super.key});
@@ -26,46 +26,49 @@ class MyAuthLayout extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-                width: width * 0.5,
-                child: Image.asset(_cilogluImage, fit: BoxFit.fill)),
-            TopTextWidget(title: _mainTitle),
-            verticalSpaceSmall,
-            CustomElevatedButton(
-              backColor: kcPrimaryCascadeTwilight,
-              title: Text(
-                _signupText,
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: myButtonFontSize),
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  width: width - 300 < height ? width * 0.5 : 500,
+                  child: Image.asset(_cilogluImage, fit: BoxFit.fill)),
+              TopTextWidget(title: _mainTitle),
+              verticalSpaceSmall,
+              CustomElevatedButton(
+                backColor: kcPrimaryCascadeTwilight,
+                title: Text(
+                  _signupText,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: myButtonFontSize),
+                ),
+                height: height,
+                width: width,
+                ontap: () {
+                  Grock.to(const SignupKeyboardControls());
+                },
               ),
-              height: height * 0.07,
-              width: width * 0.9,
-              ontap: () {
-                Get.to(const SignupKeyboardControls());
-              },
-            ),
-            verticalSpaceTiny,
-            CustomOutlinedButton(
-              backColor: kcPrimaryCascadeTwilight,
-              title: Text(
-                _signinText,
-                style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                    color: kcPrimaryCascadeTwilight,
-                    fontWeight: FontWeight.bold,
-                    fontSize: myButtonFontSize),
-              ),
-              height: height * 0.07,
-              width: width * 0.9,
-              ontap: () {
-                Get.to(const LoginKeyboard());
-              },
-            )
-          ],
+              verticalSpaceTiny,
+              CustomOutlinedButton(
+                backColor: kcwhite54,
+                title: Text(
+                  _signinText,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                      color: kcPrimaryCascadeTwilight,
+                      fontWeight: FontWeight.bold,
+                      fontSize: myButtonFontSize),
+                ),
+                height: height,
+                width: width,
+                ontap: () {
+                  Grock.to(const LoginKeyboard());
+                },
+              )
+            ],
+          ),
         ),
       )),
     );

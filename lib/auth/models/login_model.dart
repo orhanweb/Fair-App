@@ -1,12 +1,10 @@
 import 'package:fair_app/Home/screens/home.dart';
-import 'package:fair_app/shared/helpers.widget.dart';
-import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:grock/grock.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final TextEditingController? loginPasswordController;
@@ -54,7 +52,7 @@ class AuthCubit extends Cubit<AuthState> {
                   email: snapEmail.docs[0]["email"],
                   password: (loginPasswordController ?? nullCheck).text.trim())
               .then((value) {
-            Get.to(HomeView(username: snapEmail.docs[0]["userName"]));
+            Grock.to(HomeView(username: snapEmail.docs[0]["userName"]));
           });
           emit(Succes());
         }
@@ -93,7 +91,7 @@ class AuthCubit extends Cubit<AuthState> {
             'userName': createNameController!.text,
             'email': createEmailController!.text
           }).then((value) =>
-              {Get.to(HomeView(username: createNameController!.text))});
+              {Grock.to(HomeView(username: createNameController!.text))});
           emit(Succes());
         } else {
           emit(UserNameAlreadyUse());
