@@ -43,13 +43,11 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   flutter_keyboard_visibility: ^5.4.0
 
-  equatable: ^2.0.5
   flutter_expandable_fab: ^1.6.1
-  motion_toast: ^2.6.4
-  cherry_toast: ^1.0.8
   grock: ^0.0.9+3
-  draggable_expandable_fab: ^1.0.0
-
+  permission_handler: ^10.2.0
+  image_picker: ^0.8.6
+  dotted_border: ^2.0.0+3
 dev_dependencies:
   flutter_test:
     sdk: flutter

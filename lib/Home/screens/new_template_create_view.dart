@@ -1,12 +1,13 @@
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/shared/const.dart';
-import 'package:fair_app/widgets/custom_FAB.dart';
+import 'package:fair_app/widgets/custom_fab.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -29,17 +30,15 @@ class NewCardCreateView extends StatelessWidget {
             GestureType.onPanUpdateDownDirection,
           ],
           child: Scaffold(
-            appBar:
-                AppBar(title: MyTemplateNameWidget(templateName: templateName)),
+            appBar: AppBar(
+              title: MyTemplateNameWidget(templateName: templateName),
+            ),
             body: BlocBuilder<CardListCubit, CardListState>(
               builder: (context, state) {
                 return state is CreateNewCardElements &&
                         state.createNewCardElements.isNotEmpty
                     ? MyCustomListWidget(
                         height: height,
-                        onReorder: (oldIndex, newIndex) => context
-                            .read<CardListCubit>()
-                            .onReorderCreateCardElements(oldIndex, newIndex),
                         builderList: state.createNewCardElements)
                     : NoDataColumn(
                         height: height,
@@ -49,72 +48,15 @@ class NewCardCreateView extends StatelessWidget {
               },
             ),
             floatingActionButtonLocation: ExpandableFab.location,
-            floatingActionButton: BlocBuilder<CardListCubit, CardListState>(
-              builder: (context, state) {
-                return ExpandableFab(
-                    openButtonHeroTag: "opening",
-                    closeButtonHeroTag: "closing",
-                    distance: 70,
-                    backgroundColor: kcPrimaryCascadeTwilight,
-                    closeButtonStyle: const ExpandableFabCloseButtonStyle(
-                        backgroundColor: kcDangerZone,
-                        foregroundColor: kcwhite,
-                        child: Icon(
-                          Icons.more_vert_outlined,
-                          size: 40,
-                        )),
-                    type: ExpandableFabType.up,
-                    child: const Icon(
-                      Icons.more_horiz_outlined,
-                      size: 40,
-                    ),
-                    children: [
-                      myfloatingActionButton(
-                        heroTag: "1",
-                        icon: Icons.edit,
-                        toolTip: "Yeni Alan Ekleyin",
-                        onPressed: () {
-                          context
-                              .read<CardListCubit>()
-                              .addField(context: context);
-                        },
-                      ),
-                      myfloatingActionButton(
-                        heroTag: "2",
-                        icon: Icons.save,
-                        toolTip: "Şablonu Kaydedin",
-                        onPressed: () {
-                          if (templateName.text.isNotEmpty &&
-                              state is CreateNewCardElements) {
-                            context.read<CardListCubit>().saveTheNewCard(
-                                context: context,
-                                templateName: templateName.text);
-                          } else {
-                            myCoolSnackBar(
-                                color: kcDangerZone,
-                                icon: Icons.warning_amber_rounded,
-                                title: "Uyarı!",
-                                description: "Şablon Adı Girilmelidir",
-                                textTheme: Theme.of(context).textTheme);
-                          }
-                        },
-                      )
-                    ]);
-              },
-            ),
+            floatingActionButton: !isKeyboardVisible
+                ? ExpandableButtons(templateName: templateName)
+                : null,
           ),
         );
       },
     );
   }
 }
-
-//  floatingActionButton: !isKeyboardVisible
-//                 ? MyFloatingButtons(
-//                     height: height, width: width, templateName: templateName)
-//                 : null,
-//             floatingActionButtonLocation:
-//                 FloatingActionButtonLocation.centerFloat,
 
 class MyTemplateNameWidget extends StatelessWidget {
   const MyTemplateNameWidget({
@@ -149,79 +91,100 @@ class MyCustomListWidget extends StatelessWidget {
     Key? key,
     required this.height,
     required this.builderList,
-    required this.onReorder,
   }) : super(key: key);
 
   final double height;
   final List builderList;
-  final void Function(int, int) onReorder;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 9,
-          child: ReorderableListView.builder(
-              padding: EdgeInsets.only(top: height * 0.015),
-              physics: const BouncingScrollPhysics(),
-              itemCount: builderList.length,
-              itemBuilder: (context, index) {
-                return builderList[index][1];
-              },
-              onReorder: onReorder),
-        ),
-        Expanded(flex: 1, child: Container())
-      ],
-    );
+    return ListView.builder(
+        padding: EdgeInsets.only(top: height * 0.015),
+        physics: const BouncingScrollPhysics(),
+        itemCount: builderList.length,
+        itemBuilder: (context, index) {
+          return builderList[index][1];
+        });
   }
 }
 
+class ExpandableButtons extends StatelessWidget {
+  const ExpandableButtons({
+    Key? key,
+    required this.templateName,
+  }) : super(key: key);
 
+  final TextEditingController templateName;
 
-
-
-
-
-
-
-// ExpandableDraggableFab(
-//                   distance: 70,
-//                   childrenCount: 2,
-//                   childrenType: ChildrenType.columnChildren,
-//                   childrenTransition: ChildrenTransition.scaleTransation,
-//                   childrenAlignment: Alignment.centerRight,
-//                   duration: const Duration(milliseconds: 300),
-//                   enableChildrenAnimation: false,
-//                   children: [
-//                     myfloatingActionButton(
-//                       heroTag: "1",
-//                       icon: Icons.edit,
-//                       toolTip: "Yeni Alan Ekleyin",
-//                       onPressed: () {
-//                         context
-//                             .read<CardListCubit>()
-//                             .addField(context: context);
-//                       },
-//                     ),
-//                     myfloatingActionButton(
-//                       heroTag: "2",
-//                       icon: Icons.save,
-//                       toolTip: "Şablonu Kaydedin",
-//                       onPressed: () {
-//                         if (templateName.text.isNotEmpty &&
-//                             state is CreateNewCardElements) {
-//                           context.read<CardListCubit>().saveTheNewCard(
-//                               context: context,
-//                               templateName: templateName.text);
-//                         } else {
-//                           myCoolSnackBar(
-//                               color: kcDangerZone,
-//                               icon: Icons.warning_amber_rounded,
-//                               title: "Uyarı!",
-//                               description: "Şablon Adı Girilmelidir",
-//                               textTheme: Theme.of(context).textTheme);
-//                         }
-//                       },
-//                     )
-//                   ],
-//                 );
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CardListCubit, CardListState>(
+      builder: (context, state) {
+        return ExpandableFab(
+            openButtonHeroTag: "opening",
+            closeButtonHeroTag: "closing",
+            distance: 70,
+            backgroundColor: kcPrimaryCascadeTwilight,
+            closeButtonStyle: const ExpandableFabCloseButtonStyle(
+                backgroundColor: kcDangerZone,
+                foregroundColor: kcwhite,
+                child: Icon(
+                  Icons.more_vert_outlined,
+                  size: 40,
+                )),
+            type: ExpandableFabType.up,
+            child: const Icon(
+              Icons.more_horiz_outlined,
+              size: 40,
+            ),
+            children: [
+              myfloatingActionButton(
+                icon: Icons.add_comment,
+                heroTag: "4",
+                onPressed: () async {
+                  // XFile? image= await ImagePicker().pickImage(source: ImageSource.gallery);
+                },
+              ),
+              BlocBuilder<CardListCubit, CardListState>(
+                builder: (context, state) {
+                  return myfloatingActionButton(
+                    heroTag: "3",
+                    icon: Icons.photo_camera,
+                    toolTip: "Camerayı Açın",
+                    onPressed: () async {
+                      context.read<CardListCubit>().addCameraField();
+                    },
+                  );
+                },
+              ),
+              myfloatingActionButton(
+                heroTag: "2",
+                icon: Icons.edit,
+                toolTip: "Yeni Alan Ekleyin",
+                onPressed: () {
+                  context.read<CardListCubit>().addTextField(context: context);
+                },
+              ),
+              myfloatingActionButton(
+                heroTag: "1",
+                icon: Icons.save,
+                toolTip: "Şablonu Kaydedin",
+                onPressed: () {
+                  if (templateName.text.isNotEmpty ||
+                      state is CreateNewCardElements) {
+                    context.read<CardListCubit>().saveTheNewCard(
+                        context: context, templateName: templateName.text);
+                  } else {
+                    myCoolSnackBar(
+                        color: kcDangerZone,
+                        icon: Icons.warning_amber_rounded,
+                        title: "Uyarı!",
+                        description: "Şablon Adı Girilmelidir",
+                        textTheme: Theme.of(context).textTheme);
+                  }
+                },
+              ),
+            ]);
+      },
+    );
+  }
+}

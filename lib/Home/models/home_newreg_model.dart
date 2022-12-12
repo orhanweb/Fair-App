@@ -1,4 +1,4 @@
-import 'package:fair_app/Home/homespecialWidgets/newreg_input_field_widget.dart';
+import 'package:fair_app/Home/template_elements/text_field_elements.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,15 +36,15 @@ class NewRegCubit extends Cubit<NewRegState> {
   //////////////////////////////////////////////////////////
   Future<void> writetoFirebase(BuildContext contextforSnackBar) async {
     bool isShowSnackBar = false;
-    int bosmu = 0;
+    int isThatEmpty = 0;
     Map<String, dynamic> sendtoFireStore = {};
     if (textfieldListwithControllers.isNotEmpty) {
       for (var i = 0; i < textfieldListwithControllers.length; i++) {
         if (textfieldListwithControllers[i][0].text.isEmpty) {
-          bosmu++;
+          isThatEmpty++;
         }
       }
-      if (bosmu == textfieldListwithControllers.length) {
+      if (isThatEmpty == textfieldListwithControllers.length) {
         myCoolSnackBar(
             color: kcDangerZone,
             icon: Icons.warning_amber_rounded,
@@ -110,9 +110,7 @@ class NewRegCubit extends Cubit<NewRegState> {
           description: "Boş Liste Gönderilemez",
           textTheme: Theme.of(contextforSnackBar).textTheme);
     }
-  }
-
-  //FUNC END : SEND FORM TO FIREBASE
+  } //FUNC END : SEND FORM TO FIREBASE
 
   void cleartextfieldListwithControllers() {
     textfieldListwithControllers.clear();
@@ -120,6 +118,7 @@ class NewRegCubit extends Cubit<NewRegState> {
         textfieldListwithControllers: textfieldListwithControllers));
   }
 
+  // New Reg Reorderable Func -- Not Used
   void onReorderNewReg(int oldIndex, int newIndex) {
     if (oldIndex < newIndex) {
       newIndex -= 1;

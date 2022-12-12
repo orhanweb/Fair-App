@@ -1,5 +1,5 @@
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
-import 'package:fair_app/Home/models/home_newreg_model.dart';
+import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,22 +10,19 @@ class MyListViewBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return BlocBuilder<NewRegCubit, NewRegState>(
+    return BlocBuilder<CardListCubit, CardListState>(
       builder: (context, state) {
-        return state is NewReginitialize &&
-                state.textfieldListwithControllers.isNotEmpty
-            ? ReorderableListView.builder(
+        return state is CardListInitial &&
+                state.newRegPageElementsList.isNotEmpty
+            ? ListView.builder(
                 padding: EdgeInsets.only(top: height * 0.01),
                 //separatorBuilder: (context, index) => verticalSpaceTiny,
                 physics: const BouncingScrollPhysics(),
-                itemCount: state.textfieldListwithControllers.length,
+                itemCount: state.newRegPageElementsList.length,
                 itemBuilder: (context, index) {
-                  return state.textfieldListwithControllers[index][1];
-                },
-                onReorder: (oldIndex, newIndex) => context
-                    .read<NewRegCubit>()
-                    .onReorderNewReg(oldIndex, newIndex),
-              )
+                  //print(state.newRegPageElementsList);
+                  return state.newRegPageElementsList[index];
+                })
             : NoDataColumn(
                 height: height,
                 width: width,

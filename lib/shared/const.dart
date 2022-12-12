@@ -52,5 +52,6 @@ final ButtonStyle customoutlinedbuttomstyle = OutlinedButton.styleFrom(
 
 // Input Border Style
 InputDecoration customhomeinputstyle(String? text) {
-  return InputDecoration(label: Text(text ?? ""), border: myOutlineInputBorder);
+  return InputDecoration(
+      label: Text(text ?? "Konu Adı (Gerekli)"), border: myOutlineInputBorder);
 }

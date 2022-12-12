@@ -10,7 +10,7 @@ class MySliverAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-        title: const Text("Fuar Anasayfa"),
+        title: const Text("Ekin Anasayfa"),
         scrolledUnderElevation: 0,
         actions: [
           IconButton(

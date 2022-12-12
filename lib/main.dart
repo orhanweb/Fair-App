@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   NewRegCubit(textfieldListwithControllers: [])),
-          BlocProvider(create: (context) => CardListCubit(mainCardList: []))
+          BlocProvider(create: (context) => CardListCubit())
         ],
         child: MaterialApp(
             navigatorKey: Grock.navigationKey,

@@ -1,4 +1,6 @@
 import 'package:fair_app/Home/models/home_newreg_model.dart';
+import 'package:fair_app/Home/models/home_templates_cubit.dart';
+import 'package:fair_app/Home/template_elements/text_field_elements.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
@@ -129,7 +131,7 @@ Widget mycustomDialog(BuildContext buttoncontext) {
         width: width * 0.3 > 200 ? 200 : width * 0.3,
         ontap: () => Navigator.pop(buttoncontext, 'İptal Et'),
       ),
-      BlocBuilder<NewRegCubit, NewRegState>(
+      BlocBuilder<CardListCubit, CardListState>(
         builder: (context, state) {
           return CustomElevatedButton(
             backColor: kcPrimaryCascadeTwilight,
@@ -138,8 +140,15 @@ Widget mycustomDialog(BuildContext buttoncontext) {
             width: width * 0.3 > 200 ? 200 : width * 0.3,
             ontap: () {
               if (dialogcontroller.text.isNotEmpty) {
-                context.read<NewRegCubit>().addnewElement(
-                    text: dialogcontroller.text, context: buttoncontext);
+                context
+                    .read<CardListCubit>()
+                    .mainCardListInstance
+                    .newRegPageElementsList
+                    .add(newRegInputField(
+                        controller: TextEditingController(),
+                        context: context,
+                        text: dialogcontroller.text));
+                context.read<CardListCubit>().emitCardListInitial();
                 Navigator.pop(context, 'Ekle');
               } else {
                 myCoolSnackBar(

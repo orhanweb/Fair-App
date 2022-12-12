@@ -1,100 +1,155 @@
-import 'package:fair_app/Home/homespecialWidgets/newreg_input_field_widget.dart';
+import 'package:fair_app/Home/homespecialWidgets/templates_card_design.dart';
+import 'package:fair_app/Home/template_elements/camera_elements.dart';
+import 'package:fair_app/Home/template_elements/text_field_elements.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+// SAME THING TEMPLATE = CARD
 
 class CardListCubit extends Cubit<CardListState> {
-  CardListCubit({required this.mainCardList})
-      : super(CardListInitial(mainCardList: mainCardList));
+  CardListCubit()
+      : super(CardListInitial(mainCardList: [], newRegPageElementsList: []));
 
-  final List<List> mainCardList;
+  CardListInitial mainCardListInstance =
+      CardListInitial(mainCardList: [], newRegPageElementsList: []);
   CreateNewCardElements instanceofCreateNewCard =
       CreateNewCardElements(createNewCardElements: []);
 
-  void addField({required BuildContext context}) {
+  //////////////////////////////////////////////////////////
+  //         ADD TEXT FIELD TO NEW CARD ELEMENTS          //
+  //////////////////////////////////////////////////////////
+  void addTextField({required BuildContext context}) {
     final List addOnefield = [];
     final TextEditingController controller = TextEditingController();
-    addOnefield.add(controller);
+    addOnefield.add("TEXTFIELD");
     addOnefield.add(newRegInputField(controller: controller, context: context));
+    addOnefield.add(controller);
     instanceofCreateNewCard.createNewCardElements.add(addOnefield);
     emit(CreateNewCardElements(
         createNewCardElements: instanceofCreateNewCard.createNewCardElements));
   }
+  //FUNC END : ADD TEXT FIELD
 
-  void addNewCardToCardList(
-      {required String titleName, required List<String> elements}) {
-    final List addCardFeatures = [];
-
-    addCardFeatures.add(titleName);
-    addCardFeatures.add(elements);
-    mainCardList.add(addCardFeatures);
-    emit(CardListInitial(mainCardList: mainCardList));
+  Future<void> addCameraField() async {
+    final List addOneCameraField = [];
+    PermissionStatus status = await Permission.camera.request();
+    if (status.isGranted) {
+      myCoolSnackBar(
+          title: "Güzel Haber!",
+          description: "Kamera izni açıldı",
+          icon: Icons.settings_sharp,
+          color: kcParisGreen);
+      addOneCameraField.add("CAMERA");
+      addOneCameraField.add(CameraElements());
+      instanceofCreateNewCard.createNewCardElements.add(addOneCameraField);
+      emit(CreateNewCardElements(
+          createNewCardElements:
+              instanceofCreateNewCard.createNewCardElements));
+    } else if (status.isDenied) {
+      myCoolSnackBar(
+          title: "Uyarı!",
+          description: "Kamera iznini açmak için tıkla",
+          icon: Icons.settings_sharp,
+          trailing: const IconButton(
+            onPressed: openAppSettings,
+            icon: Icon(Icons.double_arrow_outlined),
+          ),
+          color: kcDangerZone);
+    }
   }
 
-  /////// SAVE THE NEW TEMPLATE
+  /////////////////////////////////////////////////////////
+  //                   SAVE THE NEW CARD                 //
+  /////////////////////////////////////////////////////////
   void saveTheNewCard(
       {required BuildContext context, required String templateName}) {
-    List<String> elements = [];
-    bool isemptyBox = false; // Is empty template text fields
-    int isAllEmpy = 0;
-    if (instanceofCreateNewCard.createNewCardElements.isNotEmpty) {
-      for (int i = 0;
-          i < instanceofCreateNewCard.createNewCardElements.length;
-          i++) {
-        if (instanceofCreateNewCard
-            .createNewCardElements[i][0].text.isNotEmpty) {
-          elements
-              .add(instanceofCreateNewCard.createNewCardElements[i][0].text);
-        } else {
-          isAllEmpy++;
-          isemptyBox = true;
+    int numberOfEmtpyRequiredFields = 0;
+    if (templateName.isNotEmpty) {
+      List<Widget> elements = [];
+      if (instanceofCreateNewCard.createNewCardElements.isNotEmpty) {
+        for (int index = 0;
+            index < instanceofCreateNewCard.createNewCardElements.length;
+            index++) {
+          if (instanceofCreateNewCard.createNewCardElements[index][0] ==
+              "TEXTFIELD") {
+            if (instanceofCreateNewCard
+                .createNewCardElements[index][2].text.isNotEmpty) {
+              TextEditingController controller = TextEditingController();
+              elements.add(newRegInputField(
+                  controller: controller,
+                  context: context,
+                  text: instanceofCreateNewCard
+                      .createNewCardElements[index][2].text));
+            } else {
+              numberOfEmtpyRequiredFields++;
+            }
+          } else if (instanceofCreateNewCard.createNewCardElements[index][0] ==
+              "CAMERA") {
+            elements.add(CameraElements(onTapUse: true));
+          }
         }
-      }
-      if (isAllEmpy == instanceofCreateNewCard.createNewCardElements.length) {
-        myCoolSnackBar(
-            color: kcDangerZone,
-            icon: Icons.warning_amber_rounded,
-            title: "Uyarı!",
-            description: "En az 1 alan doldurmalısınız.",
-            textTheme: Theme.of(context).textTheme);
-      } else {
-        if (isemptyBox) {
+        if (numberOfEmtpyRequiredFields ==
+            instanceofCreateNewCard.createNewCardElements.length) {
           myCoolSnackBar(
               color: kcDangerZone,
               icon: Icons.warning_amber_rounded,
               title: "Uyarı!",
-              description: "Boş Alanlar Dikkate Alınmadı",
+              description:
+                  "Şablona eklediğiniz gerekli alanlardan en az birini doldurun.",
               textTheme: Theme.of(context).textTheme);
-        }
-        myCoolSnackBar(
-            color: kcParisGreen,
-            icon: Icons.download_done_outlined,
-            title: "Güzel Haber!",
-            description: "Şablon Kaydedildi",
-            textTheme: Theme.of(context).textTheme);
-        deleteOldCardInfo();
-        addNewCardToCardList(titleName: templateName, elements: elements);
+        } else {
+          instanceofCreateNewCard.createNewCardElements.clear();
 
-        Navigator.pop(context);
+          emit(CreateNewCardElements(
+            createNewCardElements:
+                instanceofCreateNewCard.createNewCardElements,
+          ));
+          Navigator.pop(context);
+
+          // => MAIN PROCESS : ADD NEW CARD TO CARD LIST
+          createCard(templateName: templateName, elements: elements);
+        }
+      } else {
+        myCoolSnackBar(
+            color: kcDangerZone,
+            icon: Icons.warning_amber_rounded,
+            title: "Uyarı!",
+            description: "Şablona en az bir eleman ekleyin",
+            textTheme: Theme.of(context).textTheme);
       }
     } else {
       myCoolSnackBar(
           color: kcDangerZone,
           icon: Icons.warning_amber_rounded,
           title: "Uyarı!",
-          description: "En az 1 alan girip doldurmalısınız",
+          description: "Şablon adı olmazsa olmazımızdır",
           textTheme: Theme.of(context).textTheme);
     }
+  } // FUNC END : SAVE THE NEW CARD PROPERTIES(TEMPLATE)
+
+  void createCard(
+      {required String templateName, required List<Widget> elements}) {
+    Widget newCard = DesignedCard(
+      titleName: templateName,
+      onTap: () {
+        mainCardListInstance.newRegPageElementsList = elements;
+
+        emit(CardListInitial(
+            mainCardList: mainCardListInstance.mainCardList,
+            newRegPageElementsList:
+                mainCardListInstance.newRegPageElementsList));
+      },
+    );
+    mainCardListInstance.mainCardList.add(newCard);
+    emit(CardListInitial(
+        mainCardList: mainCardListInstance.mainCardList,
+        newRegPageElementsList: mainCardListInstance.newRegPageElementsList));
   }
 
-  void deleteOldCardInfo() {
-    instanceofCreateNewCard.createNewCardElements.clear();
-    emit(CreateNewCardElements(
-        createNewCardElements: instanceofCreateNewCard.createNewCardElements));
-  }
-
-  //CARD ELEMENTS ITEMS REORDER FUNC
+  //CARD ELEMENTS ITEMS REORDER FUNC - Not USed
   void onReorderCreateCardElements(int oldIndex, int newIndex) {
     if (oldIndex < newIndex) {
       newIndex -= 1;
@@ -106,23 +161,31 @@ class CardListCubit extends Cubit<CardListState> {
         createNewCardElements: instanceofCreateNewCard.createNewCardElements));
   }
 
-  //MAIN CARD LİST REORDER FUNC
+  //MAIN CARD LİST REORDER FUNC -- Not Used
   void onReorderCardList(int oldIndex, int newIndex) {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
-    final item = mainCardList.removeAt(oldIndex);
-    mainCardList.insert(newIndex, item);
-    emit(CardListInitial(mainCardList: mainCardList));
+    final item = mainCardListInstance.mainCardList.removeAt(oldIndex);
+    mainCardListInstance.mainCardList.insert(newIndex, item);
+    emit(CardListInitial(
+        mainCardList: mainCardListInstance.mainCardList,
+        newRegPageElementsList: mainCardListInstance.newRegPageElementsList));
   }
+
+  void emitCardListInitial() => emit(CardListInitial(
+      mainCardList: mainCardListInstance.mainCardList,
+      newRegPageElementsList: mainCardListInstance.newRegPageElementsList));
 }
 
 abstract class CardListState {}
 
 class CardListInitial extends CardListState {
-  final List<List> mainCardList;
+  final List<Widget> mainCardList;
+  List<Widget> newRegPageElementsList;
 
-  CardListInitial({required this.mainCardList});
+  CardListInitial(
+      {required this.mainCardList, required this.newRegPageElementsList});
 }
 
 class CreateNewCardElements extends CardListState {

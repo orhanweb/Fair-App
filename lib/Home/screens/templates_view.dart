@@ -1,7 +1,5 @@
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
-import 'package:fair_app/Home/homespecialWidgets/templates_cart_design.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
-import 'package:fair_app/Home/models/home_newreg_model.dart';
 import 'package:fair_app/Home/screens/new_template_create_view.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
@@ -20,41 +18,23 @@ class TemplatesView extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: BlocBuilder<NewRegCubit, NewRegState>(
-        builder: (newregcontext, newregstate) {
-          return BlocBuilder<CardListCubit, CardListState>(
-            builder: (context, state) {
-              return state is CardListInitial && state.mainCardList.isNotEmpty
-                  ? ReorderableListView.builder(
-                      padding: EdgeInsets.only(top: height * 0.01),
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: state.mainCardList.length,
-                      itemBuilder: (context, index) => DesignedCard(
-                        key: ValueKey(index),
-                        titleName: state.mainCardList[index][0],
-                        onTap: () {
-                          newregcontext
-                              .read<NewRegCubit>()
-                              .cleartextfieldListwithControllers();
-                          for (String title in state.mainCardList[index][1]) {
-                            newregcontext
-                                .read<NewRegCubit>()
-                                .addnewElement(text: title, context: context);
-                          }
-                        },
-                      ),
-                      onReorder: (oldIndex, newIndex) => context
-                          .read<CardListCubit>()
-                          .onReorderCardList(oldIndex, newIndex),
-                    )
-                  : NoDataColumn(
-                      height: height,
-                      width: width,
-                      nolistimagePath: noCardImage,
-                      text: "Şablon Listeniz Boş",
-                    );
-            },
-          );
+      body: BlocBuilder<CardListCubit, CardListState>(
+        builder: (context, state) {
+          return state is CardListInitial && state.mainCardList.isNotEmpty
+              ? ListView.builder(
+                  padding: EdgeInsets.only(top: height * 0.01),
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: state.mainCardList.length,
+                  itemBuilder: (context, index) {
+                    return state.mainCardList[index];
+                  },
+                )
+              : NoDataColumn(
+                  height: height,
+                  width: width,
+                  nolistimagePath: noCardImage,
+                  text: "Şablon Listeniz Boş",
+                );
         },
       ),
       floatingActionButton: BlocBuilder<CardListCubit, CardListState>(
