@@ -1,4 +1,3 @@
-import 'package:fair_app/Home/template_elements/text_field_elements.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,22 +12,6 @@ class NewRegCubit extends Cubit<NewRegState> {
   final List<List> textfieldListwithControllers;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  //////////////////////////////////////////////////////////
-  //                  ADD NEW ELEMENT                     //
-  //////////////////////////////////////////////////////////
-  void addnewElement({required String text, required BuildContext context}) {
-    final TextEditingController controller = TextEditingController();
-    final List newElementList = [];
-
-    newElementList.add(controller);
-    newElementList.add(
-        newRegInputField(controller: controller, context: context, text: text));
-    newElementList.add(text);
-    textfieldListwithControllers.add(newElementList);
-
-    emit(NewReginitialize(
-        textfieldListwithControllers: textfieldListwithControllers));
-  }
   //FUNC END : ADD NEW ELEMENT
 
   //////////////////////////////////////////////////////////

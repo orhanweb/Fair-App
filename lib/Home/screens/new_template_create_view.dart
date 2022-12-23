@@ -1,5 +1,9 @@
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
+import 'package:fair_app/Home/template_elements/camera_elements.dart';
+import 'package:fair_app/Home/template_elements/mic_elements.dart';
+import 'package:fair_app/Home/template_elements/one_answer.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_fab.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
@@ -32,6 +36,23 @@ class NewCardCreateView extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               title: MyTemplateNameWidget(templateName: templateName),
+              automaticallyImplyLeading: false,
+              centerTitle: true,
+              actions: [
+                BlocBuilder<CardListCubit, CardListState>(
+                  builder: (context, state) {
+                    return IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          context.read<CardListCubit>().emitCardListInitial();
+                        },
+                        icon: const Icon(
+                          Icons.close_outlined,
+                          size: 30,
+                        ));
+                  },
+                )
+              ],
             ),
             body: BlocBuilder<CardListCubit, CardListState>(
               builder: (context, state) {
@@ -68,20 +89,23 @@ class MyTemplateNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: templateName,
-      cursorColor: kcwhite,
-      style: Theme.of(context)
-          .textTheme
-          .subtitle1
-          ?.copyWith(fontWeight: FontWeight.w500, fontSize: 18, color: kcwhite),
-      decoration: InputDecoration(
-          hintText: "Şablonun Adı",
-          hintStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
-                color: kcwhite54,
-                fontWeight: FontWeight.w400,
-                fontSize: 18,
-              )),
+    double width = MediaQuery.of(context).size.width;
+    return SizedBox(
+      width: width * 0.7,
+      child: TextField(
+        textAlign: TextAlign.center,
+        controller: templateName,
+        cursorColor: kcwhite,
+        style: Theme.of(context).textTheme.subtitle1?.copyWith(
+            fontWeight: FontWeight.w500, fontSize: 18, color: kcwhite),
+        decoration: InputDecoration(
+            hintText: "Şablonun Adı",
+            hintStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  color: kcwhite54,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                )),
+      ),
     );
   }
 }
@@ -138,22 +162,65 @@ class ExpandableButtons extends StatelessWidget {
             ),
             children: [
               myfloatingActionButton(
-                icon: Icons.add_comment,
-                heroTag: "4",
+                heroTag: "5",
+                icon: Icons.question_answer_outlined,
+                toolTip: "Soru Sorun",
                 onPressed: () async {
-                  // XFile? image= await ImagePicker().pickImage(source: ImageSource.gallery);
+                  //context.read<CardListCubit>().addCameraField();
+                  context
+                      .read<CardListCubit>()
+                      .instanceofCreateNewCard
+                      .createNewCardElements
+                      .add(["ONEANSWER", OneAnswer()]);
+                  context.read<CardListCubit>().emitcreateNewCardElements();
                 },
               ),
-              BlocBuilder<CardListCubit, CardListState>(
-                builder: (context, state) {
-                  return myfloatingActionButton(
-                    heroTag: "3",
-                    icon: Icons.photo_camera,
-                    toolTip: "Camerayı Açın",
-                    onPressed: () async {
-                      context.read<CardListCubit>().addCameraField();
-                    },
-                  );
+              myfloatingActionButton(
+                heroTag: "4",
+                icon: Icons.mic_outlined,
+                toolTip: "Ses kaydedin",
+                onPressed: () async {
+                  RecorderController audioCont = RecorderController();
+
+                  //context.read<CardListCubit>().addCameraField();
+                  context
+                      .read<CardListCubit>()
+                      .instanceofCreateNewCard
+                      .createNewCardElements
+                      .add([
+                    "MIC",
+                    MicCustom(
+                        audioCont: audioCont,
+                        indexInList: context
+                            .read<CardListCubit>()
+                            .instanceofCreateNewCard
+                            .createNewCardElements
+                            .length)
+                  ]);
+                  context.read<CardListCubit>().emitcreateNewCardElements();
+                },
+              ),
+              myfloatingActionButton(
+                heroTag: "3",
+                icon: Icons.photo_camera,
+                toolTip: "Camerayı Açın",
+                onPressed: () async {
+                  //context.read<CardListCubit>().addCameraField();
+                  context
+                      .read<CardListCubit>()
+                      .instanceofCreateNewCard
+                      .createNewCardElements
+                      .add([
+                    "CAMERA",
+                    CameraElements(
+                        indexInList: context
+                            .read<CardListCubit>()
+                            .instanceofCreateNewCard
+                            .createNewCardElements
+                            .length),
+                    null
+                  ]);
+                  context.read<CardListCubit>().emitcreateNewCardElements();
                 },
               ),
               myfloatingActionButton(

@@ -45,7 +45,9 @@ class SignupPageView extends StatelessWidget {
         LoginContent(
           isKeyboardVisible: isKeyboardVisible,
         ),
-        sendButton(height, width, context),
+        isKeyboardVisible
+            ? const SizedBox()
+            : sendButton(height, width, context),
       ])),
     );
   }

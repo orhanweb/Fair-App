@@ -1,13 +1,17 @@
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:fair_app/Home/homespecialWidgets/custom_floating_actiob_button.dart';
 import 'package:fair_app/Home/homespecialWidgets/custom_listview_builder.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
+import 'package:fair_app/Home/template_elements/mic_elements.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_fab.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+
+import '../template_elements/one_answer.dart';
 
 class NewRegistration extends StatelessWidget {
   final bool isKeyboardVisible;
@@ -56,9 +60,57 @@ class NewRegistration extends StatelessWidget {
                               .read<CardListCubit>()
                               .mainCardListInstance
                               .newRegPageElementsList
-                              .add(CameraElements(
+                              .add([
+                            "CAMERA",
+                            CameraElements(
+                              onTapUse: true,
+                              indexInList: (context
+                                  .read<CardListCubit>()
+                                  .mainCardListInstance
+                                  .newRegPageElementsList
+                                  .length),
+                            ),
+                            null
+                          ]);
+                          context.read<CardListCubit>().emitCardListInitial();
+                        },
+                      ),
+                      myfloatingActionButton(
+                        heroTag: "4",
+                        icon: Icons.mic_outlined,
+                        toolTip: "Ses kaydedin",
+                        onPressed: () async {
+                          RecorderController audioCont = RecorderController();
+
+                          context
+                              .read<CardListCubit>()
+                              .mainCardListInstance
+                              .newRegPageElementsList
+                              .add([
+                            "MIC",
+                            MicCustom(
                                 onTapUse: true,
-                              ));
+                                audioCont: audioCont,
+                                indexInList: context
+                                    .read<CardListCubit>()
+                                    .mainCardListInstance
+                                    .newRegPageElementsList
+                                    .length),
+                          ]);
+                          context.read<CardListCubit>().emitCardListInitial();
+                        },
+                      ),
+                      myfloatingActionButton(
+                        heroTag: "5",
+                        icon: Icons.question_answer_outlined,
+                        toolTip: "Soru Sorun",
+                        onPressed: () async {
+                          //context.read<CardListCubit>().addCameraField();
+                          context
+                              .read<CardListCubit>()
+                              .mainCardListInstance
+                              .newRegPageElementsList
+                              .add(["ONEANSWER", OneAnswer()]);
                           context.read<CardListCubit>().emitCardListInitial();
                         },
                       ),

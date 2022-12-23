@@ -10,67 +10,6 @@ import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// CUSTOM FLOATING ACTION BUTTON
-class CustomFloatingActionButtons extends StatelessWidget {
-  const CustomFloatingActionButtons({
-    Key? key,
-    required this.height,
-    required this.width,
-    required this.context,
-  }) : super(key: key);
-
-  final BuildContext context;
-  final double height;
-  final double width;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          BlocBuilder<NewRegCubit, NewRegState>(
-            builder: (context, state) {
-              return FloatingActionButton(
-                heroTag: "Add",
-                onPressed: () =>
-                    showDialog(context: context, builder: mycustomDialog),
-                backgroundColor: kcPrimaryCascadeTwilight,
-                child: const Icon(Icons.add),
-              );
-            },
-          ),
-          verticalSpaceTiny,
-          BlocBuilder<NewRegCubit, NewRegState>(
-            builder: (context, state) {
-              return FloatingActionButton(
-                heroTag: "SendToCloud",
-                onPressed: () {
-                  context.read<NewRegCubit>().writetoFirebase(context);
-                },
-                backgroundColor: kcPrimaryCascadeTwilight,
-                child: const Icon(Icons.cloud_upload_outlined),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-//Add floatingactionbutton Later
-
-// showModalBottomSheet(
-//               context: context,
-//               builder: mycustomBottomSheet,
-//               shape: const RoundedRectangleBorder(
-//                   borderRadius:
-//                       BorderRadius.vertical(top: Radius.circular(30))),
-//               elevation: 50,
-//             ),
-// SEND CLOUD BOTTOM SHEET
 Widget mycustomBottomSheet(BuildContext context) {
   double width = MediaQuery.of(context).size.width;
   double height = MediaQuery.of(context).size.height;
@@ -140,14 +79,24 @@ Widget mycustomDialog(BuildContext buttoncontext) {
             width: width * 0.3 > 200 ? 200 : width * 0.3,
             ontap: () {
               if (dialogcontroller.text.isNotEmpty) {
+                TextEditingController controller = TextEditingController();
                 context
                     .read<CardListCubit>()
                     .mainCardListInstance
                     .newRegPageElementsList
-                    .add(newRegInputField(
-                        controller: TextEditingController(),
-                        context: context,
-                        text: dialogcontroller.text));
+                    .add([
+                  "TEXTFIELD",
+                  newRegInputField(
+                      controller: controller,
+                      context: context,
+                      text: dialogcontroller.text,
+                      indexInList: (context
+                          .read<CardListCubit>()
+                          .mainCardListInstance
+                          .newRegPageElementsList
+                          .length)),
+                  controller
+                ]);
                 context.read<CardListCubit>().emitCardListInitial();
                 Navigator.pop(context, 'Ekle');
               } else {

@@ -16,13 +16,11 @@ class MyListViewBuilder extends StatelessWidget {
                 state.newRegPageElementsList.isNotEmpty
             ? ListView.builder(
                 padding: EdgeInsets.only(top: height * 0.01),
-                //separatorBuilder: (context, index) => verticalSpaceTiny,
                 physics: const BouncingScrollPhysics(),
                 itemCount: state.newRegPageElementsList.length,
-                itemBuilder: (context, index) {
-                  //print(state.newRegPageElementsList);
-                  return state.newRegPageElementsList[index];
-                })
+                itemBuilder: (context, index) =>
+                    state.newRegPageElementsList[index][1],
+              )
             : NoDataColumn(
                 height: height,
                 width: width,

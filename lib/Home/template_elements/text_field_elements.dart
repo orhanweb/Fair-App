@@ -1,11 +1,11 @@
 import 'package:fair_app/shared/const.dart';
 import 'package:flutter/material.dart';
 
-Widget newRegInputField({
-  required TextEditingController controller,
-  String? text,
-  required BuildContext context,
-}) {
+Widget newRegInputField(
+    {required TextEditingController controller,
+    String? text,
+    required BuildContext context,
+    required int indexInList}) {
   double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
 
