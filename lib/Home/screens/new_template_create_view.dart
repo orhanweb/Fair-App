@@ -1,4 +1,3 @@
-import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
@@ -180,8 +179,6 @@ class ExpandableButtons extends StatelessWidget {
                 icon: Icons.mic_outlined,
                 toolTip: "Ses kaydedin",
                 onPressed: () async {
-                  RecorderController audioCont = RecorderController();
-
                   //context.read<CardListCubit>().addCameraField();
                   context
                       .read<CardListCubit>()
@@ -190,7 +187,6 @@ class ExpandableButtons extends StatelessWidget {
                       .add([
                     "MIC",
                     MicCustom(
-                        audioCont: audioCont,
                         indexInList: context
                             .read<CardListCubit>()
                             .instanceofCreateNewCard

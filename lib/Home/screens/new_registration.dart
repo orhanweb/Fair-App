@@ -1,5 +1,4 @@
-import 'package:audio_waveforms/audio_waveforms.dart';
-import 'package:fair_app/Home/homespecialWidgets/custom_floating_actiob_button.dart';
+import 'package:fair_app/Home/homespecialWidgets/custom_dialog.dart';
 import 'package:fair_app/Home/homespecialWidgets/custom_listview_builder.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
@@ -80,8 +79,6 @@ class NewRegistration extends StatelessWidget {
                         icon: Icons.mic_outlined,
                         toolTip: "Ses kaydedin",
                         onPressed: () async {
-                          RecorderController audioCont = RecorderController();
-
                           context
                               .read<CardListCubit>()
                               .mainCardListInstance
@@ -90,7 +87,6 @@ class NewRegistration extends StatelessWidget {
                             "MIC",
                             MicCustom(
                                 onTapUse: true,
-                                audioCont: audioCont,
                                 indexInList: context
                                     .read<CardListCubit>()
                                     .mainCardListInstance

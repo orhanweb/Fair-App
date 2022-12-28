@@ -1,4 +1,3 @@
-import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:fair_app/Home/homespecialWidgets/templates_card_design.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
 import 'package:fair_app/Home/template_elements/mic_elements.dart';
@@ -37,37 +36,6 @@ class CardListCubit extends Cubit<CardListState> {
         createNewCardElements: instanceofCreateNewCard.createNewCardElements));
   }
   //FUNC END : ADD TEXT FIELD
-
-  // Future<void> addCameraField() async {
-  //   final List addOneCameraField = [];
-  //   PermissionStatus status = await Permission.camera.request();
-  //   if (status.isGranted) {
-  //     myCoolSnackBar(
-  //         title: "Güzel Haber!",
-  //         description: "Kamera izni açıldı",
-  //         icon: Icons.settings_sharp,
-  //         color: kcParisGreen);
-  //     addOneCameraField.add("CAMERA");
-  //     addOneCameraField.add(CameraElements(
-  //       indexInList: instanceofCreateNewCard.createNewCardElements.length,
-  //     ));
-  //     print("object");
-  //     instanceofCreateNewCard.createNewCardElements.add(addOneCameraField);
-  //     emit(CreateNewCardElements(
-  //         createNewCardElements:
-  //             instanceofCreateNewCard.createNewCardElements));
-  //   } else if (status.isDenied) {
-  //     myCoolSnackBar(
-  //         title: "Uyarı!",
-  //         description: "Kamera iznini açmak için tıkla",
-  //         icon: Icons.settings_sharp,
-  //         trailing: const IconButton(
-  //           onPressed: openAppSettings,
-  //           icon: Icon(Icons.double_arrow_outlined),
-  //         ),
-  //         color: kcDangerZone);
-  //   }
-  // }
 
   /////////////////////////////////////////////////////////
   //                   SAVE THE NEW CARD                 //
@@ -109,13 +77,11 @@ class CardListCubit extends Cubit<CardListState> {
             ]);
           } else if (instanceofCreateNewCard.createNewCardElements[index][0] ==
               "MIC") {
-            RecorderController audioCont = RecorderController();
             elements.add([
               "MIC",
               MicCustom(
                 onTapUse: true,
                 indexInList: elements.length,
-                audioCont: audioCont,
               ),
             ]);
           } else if (instanceofCreateNewCard.createNewCardElements[index][0] ==

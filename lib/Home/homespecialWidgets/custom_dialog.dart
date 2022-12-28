@@ -1,53 +1,11 @@
-import 'package:fair_app/Home/models/home_newreg_model.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/text_field_elements.dart';
 import 'package:fair_app/shared/const.dart';
-import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
-import 'package:fair_app/widgets/custom_divider.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-Widget mycustomBottomSheet(BuildContext context) {
-  double width = MediaQuery.of(context).size.width;
-  double height = MediaQuery.of(context).size.height;
-  return SizedBox(
-    height: height * 0.16,
-    child: Column(
-      children: [
-        verticalSpaceTiny,
-        myDivider(),
-        verticalSpaceTiny,
-        BlocBuilder<NewRegCubit, NewRegState>(
-          builder: (context, state) {
-            return CustomElevatedButton(
-              backColor: kcPrimaryCascadeTwilight,
-              title:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Icon(Icons.cloud_upload_outlined),
-                horizontalSpaceTiny,
-                Text(
-                  "Cloud'a Yükle",
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      ?.copyWith(color: kcwhite),
-                ),
-              ]),
-              height: height * 0.07,
-              width: width * 0.5,
-              ontap: () {
-                context.read<NewRegCubit>().writetoFirebase(context);
-              },
-            );
-          },
-        ),
-      ],
-    ),
-  );
-}
 
 ///  DIALOG NEW SPACE
 Widget mycustomDialog(BuildContext buttoncontext) {

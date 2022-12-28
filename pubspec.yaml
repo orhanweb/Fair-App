@@ -50,6 +50,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   image_cropper: ^3.0.1
   google_mlkit_text_recognition: ^0.5.0
+  flutter_sound: ^9.2.13
   audio_waveforms: ^1.0.0
 
 dev_dependencies:
