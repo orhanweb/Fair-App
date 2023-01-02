@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ekin-373009",
+  "private_key_id": "c3f8b2252a827a56930aed66e780a1551a41241d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC11NXkvUMku1So\n6IfNgVkBNpzspciLNzgwmCJ9sE7jrNUDkg8GJ03+lqqD41m9LEsUZ9SrIJ80JLP2\nXkDpq74oeLP90ckjoY/5Qffu3J2lYnCL3f16vbFcv1L25EVozz61h3NmqCf62VmX\n5sv/yIlI2QF3Zylg3CEMiwwiJcthHLfChqiAQ1z2y+X5Tk5MOSaWKvCuxktjAQgK\n00820vGvvCZiwhXb9RXUN9ecMWzTyCG6koiKx6m1J3EIJIBngqruSntju4RyLbqa\nchqtRxv5l8w3irndcPX7KYWMlYQIIHL3f1/iGDG8kGtHK6n5BP+P6LA9nvLYS9a4\nTgMXpKk7AgMBAAECggEAD64yt+QeazIrIy8nrvA4UGN49ZYiYjxj1cT44c/s2F4q\nNyxHAWfYUQaF3pPM7wRn1nL8eGQldpCyYvej2hgxG4+1Le6ueCp8SP7dtl/uHw9g\ngfSl4bTZcRR1aiHWCSt+I+zHZeibHLCBCm7L1DC4rhXmC3mpAYJaPe5Wddy+hORD\nivohquSqkt5ZCOiGt+sMu5Ee2NFFrFBxIenlZducHlqH55yfNdTMUfPMkkkljtx/\nC9sAPyJUSudCLM7uEnXU8FJoeYAiiA8nkX5LtLgGVyYqaJoGVekFha7mpnxEeCZV\nnzZjcTEZkck1Arv1B4tj3A4TPUh17Xf2IhDQkxdj+QKBgQDeopaPMRbWCCrrsdYW\n/sOFkWchzFHXasKc+kLhawsDinkA15J6y5GmdDrrZFPfrILKfngEbK6zdbuf1HvG\nRHztsjqkasFiOKHctXiZrZA2/cYZ79TQejdXLrLGxVesYnbokARUbkSahf4YK6C5\nW6AOQY59qlwYeluHn+9jg4ONJQKBgQDRFM9KSeOrWzzsHrkFl6KfxIazHuex6Jik\nudm8CLRJrROiWAXCirvJTK+y6hq1ZC1K5fKe1hhxvsy/dSsBP+Fscvm+i/8hQ8hP\nGyPgjvgHKNIfxaFGQ2FySSVFqyGf8aIXmTNTdmYioB9L0UnQffhF/XiX21dc2plu\n967f51r+3wKBgGM6oFRuErmOpmKqvrs9DbRInGjqAkg7I0aIHKsP5LbNTyVa78Sf\nWumPwHsOGnwFDb5nI+ME9dCy1s9kC07RU8U1vQFvO4Ylq68NixUj0LVR4qvIw1ew\nQV4wSCpj5rHEqS76kZN4GketFRV8zIQRHIN+IJ5OAgI+9vC6Dh6SjV2pAoGAZqGa\nZ1MB6NlufFFQbUhT0a08maxv+0q7sxBvqvdy2D+XRbeDjE1hhJyaGm8EEUpNWViq\n0gEyGpOYGds/8usSkpOVuE0sPX3yU7J02AQWCB2nl2UBl2X37YuuOhaY+NQ5xu+y\n3CNgW1rSQftIConrVx/nFFPc/H1pl6kJNGtypW0CgYEAjuFbuR+k+KRCqRM29Zaw\nN3bBIPKmp9YojxcH6dn3/VkBz0Mlo74nHXwRgw2l8Fr0qClfYVOFQ2AnC0NFfVZc\nddPjJ4p5Yf2rL+N6dgjuHqWrBE6805OOM4ewiyZAs7cZZSKnO3/QgzhNqJl0uWfc\nhPXuC4aYsRH9ttmd/eyIYag=\n-----END PRIVATE KEY-----\n",
+  "client_email": "transautotx@ekin-373009.iam.gserviceaccount.com",
+  "client_id": "112783307958791108077",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/transautotx%40ekin-373009.iam.gserviceaccount.com"
+}

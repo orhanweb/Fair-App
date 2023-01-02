@@ -52,6 +52,8 @@ dependencies:
   google_mlkit_text_recognition: ^0.5.0
   flutter_sound: ^9.2.13
   audio_waveforms: ^1.0.0
+  google_speech: ^2.1.1
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +80,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/cardimages/
+    - assets/
 
   #   - images/a_dot_ham.jpeg
 
