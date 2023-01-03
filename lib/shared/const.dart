@@ -16,6 +16,7 @@ const Color kcblack45 = Colors.black45;
 const Color kcblack54 = Colors.black54;
 const Color kcwhite = Colors.white;
 const Color kcwhite54 = Colors.white54;
+const Color kcwhite38 = Colors.white38;
 
 //Button Font Size
 const double myButtonFontSize = 18;

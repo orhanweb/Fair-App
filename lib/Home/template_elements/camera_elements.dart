@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/widgets/custom_fab.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -180,7 +181,8 @@ class CameraElements extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            FloatingActionButton(
+                            myfloatingActionButton(
+                              toolTip: "Resmi Kırp",
                               onPressed: () async {
                                 File? imageCropped = await croppedImage(
                                     imagesource: context
@@ -205,38 +207,39 @@ class CameraElements extends StatelessWidget {
                                     .read<CardListCubit>()
                                     .emitCardListInitial();
                               },
-                              child: const Icon(Icons.crop_outlined),
+                              icon: Icons.crop_outlined,
                             ),
-                            FloatingActionButton(
-                              onPressed: () async {
-                                final String textOnImage = await getTextOnImage(
-                                    image: context
-                                            .read<CardListCubit>()
-                                            .mainCardListInstance
-                                            .newRegPageElementsList[indexInList]
-                                        [2]);
+                            myfloatingActionButton(
+                                toolTip: "Resimdeki Yazıyı Çıkar",
+                                onPressed: () async {
+                                  final String textOnImage =
+                                      await getTextOnImage(
+                                          image: context
+                                                  .read<CardListCubit>()
+                                                  .mainCardListInstance
+                                                  .newRegPageElementsList[
+                                              indexInList][2]);
 
-                                controller.text = textOnImage;
-                                // // ignore: use_build_context_synchronously
-                                // context
-                                //     .read<CardListCubit>()
-                                //     .mainCardListInstance
-                                //     .newRegPageElementsList[indexInList]
-                                //     .insert(3, textOnImage);
-                                // // ignore: use_build_context_synchronously
-                                // context
-                                //     .read<CardListCubit>()
-                                //     .mainCardListInstance
-                                //     .newRegPageElementsList[indexInList]
-                                //     .removeAt(4);
-                                // // ignore: use_build_context_synchronously
-                                // context
-                                //     .read<CardListCubit>()
-                                //     .emitCardListInitial();
-                                //print(textOnImage);
-                              },
-                              child: const Icon(Icons.text_snippet_outlined),
-                            )
+                                  controller.text = textOnImage;
+                                  // // ignore: use_build_context_synchronously
+                                  // context
+                                  //     .read<CardListCubit>()
+                                  //     .mainCardListInstance
+                                  //     .newRegPageElementsList[indexInList]
+                                  //     .insert(3, textOnImage);
+                                  // // ignore: use_build_context_synchronously
+                                  // context
+                                  //     .read<CardListCubit>()
+                                  //     .mainCardListInstance
+                                  //     .newRegPageElementsList[indexInList]
+                                  //     .removeAt(4);
+                                  // // ignore: use_build_context_synchronously
+                                  // context
+                                  //     .read<CardListCubit>()
+                                  //     .emitCardListInitial();
+                                  //print(textOnImage);
+                                },
+                                icon: Icons.text_snippet_rounded)
                           ],
                         ),
                       )

@@ -2,7 +2,7 @@ import 'package:fair_app/Home/homespecialWidgets/no_data_column.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
 import 'package:fair_app/Home/template_elements/mic_elements.dart';
-import 'package:fair_app/Home/template_elements/one_answer.dart';
+import 'package:fair_app/Home/template_elements/multiple_answer.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_fab.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
@@ -164,13 +164,25 @@ class ExpandableButtons extends StatelessWidget {
                 heroTag: "5",
                 icon: Icons.question_answer_outlined,
                 toolTip: "Soru Sorun",
-                onPressed: () async {
-                  //context.read<CardListCubit>().addCameraField();
+                onPressed: () {
+                  TextEditingController controller = TextEditingController();
                   context
                       .read<CardListCubit>()
                       .instanceofCreateNewCard
                       .createNewCardElements
-                      .add(["ONEANSWER", OneAnswer()]);
+                      .add([
+                    "ONEANSWER",
+                    MultipleAnswer(
+                      controller: controller,
+                      indexInList: context
+                          .read<CardListCubit>()
+                          .instanceofCreateNewCard
+                          .createNewCardElements
+                          .length,
+                    ),
+                    controller,
+                    <Widget>[]
+                  ]);
                   context.read<CardListCubit>().emitcreateNewCardElements();
                 },
               ),
@@ -179,7 +191,6 @@ class ExpandableButtons extends StatelessWidget {
                 icon: Icons.mic_outlined,
                 toolTip: "Ses kaydedin",
                 onPressed: () async {
-                  //context.read<CardListCubit>().addCameraField();
                   context
                       .read<CardListCubit>()
                       .instanceofCreateNewCard

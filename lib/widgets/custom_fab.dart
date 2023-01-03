@@ -12,6 +12,6 @@ Widget myfloatingActionButton(
     backgroundColor: backColor ?? kcPrimaryCascadeTwilight,
     onPressed: onPressed,
     tooltip: toolTip,
-    child: Icon(icon, size: 30),
+    child: Icon(icon),
   );
 }

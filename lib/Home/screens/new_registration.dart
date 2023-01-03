@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
-import '../template_elements/one_answer.dart';
+import '../template_elements/multiple_answer.dart';
 
 class NewRegistration extends StatelessWidget {
   final bool isKeyboardVisible;
@@ -101,12 +101,26 @@ class NewRegistration extends StatelessWidget {
                         icon: Icons.question_answer_outlined,
                         toolTip: "Soru Sorun",
                         onPressed: () async {
-                          //context.read<CardListCubit>().addCameraField();
+                          TextEditingController controller =
+                              TextEditingController();
                           context
                               .read<CardListCubit>()
                               .mainCardListInstance
                               .newRegPageElementsList
-                              .add(["ONEANSWER", OneAnswer()]);
+                              .add([
+                            "ONEANSWER",
+                            MultipleAnswer(
+                              controller: controller,
+                              indexInList: context
+                                  .read<CardListCubit>()
+                                  .mainCardListInstance
+                                  .newRegPageElementsList
+                                  .length,
+                            ),
+                            controller,
+                            <Widget>[],
+                            <int>[]
+                          ]);
                           context.read<CardListCubit>().emitCardListInitial();
                         },
                       ),

@@ -1,7 +1,7 @@
 import 'package:fair_app/Home/homespecialWidgets/templates_card_design.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
 import 'package:fair_app/Home/template_elements/mic_elements.dart';
-import 'package:fair_app/Home/template_elements/one_answer.dart';
+import 'package:fair_app/Home/template_elements/multiple_answer.dart';
 import 'package:fair_app/Home/template_elements/text_field_elements.dart';
 import 'package:fair_app/shared/const.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
@@ -86,7 +86,17 @@ class CardListCubit extends Cubit<CardListState> {
             ]);
           } else if (instanceofCreateNewCard.createNewCardElements[index][0] ==
               "ONEANSWER") {
-            elements.add(["ONEANSWER", OneAnswer()]);
+            elements.add([
+              "ONEANSWER",
+              MultipleAnswer(
+                controller: instanceofCreateNewCard.createNewCardElements[index]
+                    [2],
+                indexInList: elements.length,
+              ),
+              instanceofCreateNewCard.createNewCardElements[index][2],
+              instanceofCreateNewCard.createNewCardElements[index][3],
+              <int>[]
+            ]);
           }
         }
 

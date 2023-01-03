@@ -157,6 +157,7 @@ class _MicCustomState extends State<MicCustom> {
                           Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child: FloatingActionButton(
+                                  tooltip: "Ses Kaydet",
                                   onPressed: widget.onTapUse
                                       ? () async {
                                           if (recording.isRecording) {

@@ -86,7 +86,7 @@ class _RecordedSoundState extends State<RecordedSound> {
         setState(() {
           controller.text = value.results
               .map((e) => e.alternatives.first.transcript)
-              .join("\n");
+              .join('\n');
         });
       },
     ).whenComplete(
@@ -124,8 +124,8 @@ class _RecordedSoundState extends State<RecordedSound> {
                 strokeWidth: 5,
                 child: SizedBox(
                     height: controller.text.isNotEmpty
-                        ? height * 0.5
-                        : height * 0.15,
+                        ? height * 0.35
+                        : height * 0.155,
                     child: Center(
                         child: Column(children: [
                       Row(
@@ -160,6 +160,7 @@ class _RecordedSoundState extends State<RecordedSound> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             myfloatingActionButton(
+                              toolTip: "Oynat/Durdur",
                               icon: wavescontroller.playerState ==
                                       PlayerState.playing
                                   ? Icons.pause_rounded
@@ -176,6 +177,7 @@ class _RecordedSoundState extends State<RecordedSound> {
                                     },
                             ),
                             FloatingActionButton(
+                              tooltip: "Sesteki Yazıyı Çıkart",
                               onPressed: convertToText,
                               backgroundColor: kcPrimaryCascadeTwilight,
                               child: transcribingContiunue
@@ -186,6 +188,7 @@ class _RecordedSoundState extends State<RecordedSound> {
                                   : const Icon(Icons.text_snippet_rounded),
                             ),
                             myfloatingActionButton(
+                              toolTip: "Tekrar Ses Kaydet",
                               icon: Icons.replay_rounded,
                               onPressed: () {
                                 context
@@ -212,13 +215,16 @@ class _RecordedSoundState extends State<RecordedSound> {
                             )
                           ]),
                       controller.text.isNotEmpty
-                          ? SizedBox(
-                              width: width * 0.8,
-                              child: TextField(
-                                decoration:
-                                    customhomeinputstyle("Yazı Formatı"),
-                                maxLines: 5,
-                                controller: controller,
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: SizedBox(
+                                width: width * 0.8,
+                                child: TextField(
+                                  decoration:
+                                      customhomeinputstyle("Yazı Formatı"),
+                                  maxLines: 5,
+                                  controller: controller,
+                                ),
                               ),
                             )
                           : const SizedBox()
