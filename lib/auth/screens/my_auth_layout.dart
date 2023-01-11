@@ -12,7 +12,7 @@ import 'package:grock/grock.dart';
 class MyAuthLayout extends StatelessWidget {
   const MyAuthLayout({super.key});
 
-  final String _mainTitle = "Fuar'a Hoşgeldiniz";
+  final String _mainTitle = "Ekin'e Hoşgeldiniz";
   final String _signupText = "Hesap Oluştur";
   final String _signinText = "Giriş Yap";
   final String _cilogluImage = "assets/images/ciloglu.png";
