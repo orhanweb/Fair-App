@@ -3,7 +3,7 @@ import 'package:fair_app/Home/homespecialWidgets/custom_listview_builder.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
 import 'package:fair_app/Home/template_elements/mic_elements.dart';
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:fair_app/widgets/custom_fab.dart';
 
 import 'package:flutter/material.dart';

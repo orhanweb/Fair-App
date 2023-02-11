@@ -1,9 +1,9 @@
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fair_app/widgets/top_text_widget.dart';
 
-import 'package:fair_app/auth/models/login_model.dart';
+import 'package:fair_app/auth/Cubit/login_cubit.dart';
 
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
@@ -71,7 +71,7 @@ class SignupPageView extends StatelessWidget {
                   )
                 : Text(
                     _sendButtonText,
-                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: myButtonFontSize),

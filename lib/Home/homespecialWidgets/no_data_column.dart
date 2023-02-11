@@ -1,4 +1,4 @@
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +30,10 @@ class NoDataColumn extends StatelessWidget {
         verticalSpaceTiny,
         Text(
           text ?? "",
-          style:
-              Theme.of(context).textTheme.headline6?.copyWith(color: kcblack54),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
+              ?.copyWith(color: kcblack54),
         ),
       ],
     );

@@ -1,6 +1,6 @@
-import 'package:fair_app/auth/models/login_model.dart';
+import 'package:fair_app/auth/Cubit/login_cubit.dart';
 import 'package:fair_app/auth/screens/signup/signup_page_view.dart';
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 
 import 'package:flutter/material.dart';

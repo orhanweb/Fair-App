@@ -4,7 +4,7 @@ import 'package:fair_app/auth/screens/signup/signup_keyboard_controlls.dart';
 import 'package:fair_app/shared/helpers.widget.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
 import 'package:fair_app/widgets/top_text_widget.dart';
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:flutter/material.dart';
 
 import 'package:grock/grock.dart';
@@ -40,7 +40,7 @@ class MyAuthLayout extends StatelessWidget {
                 backColor: kcPrimaryCascadeTwilight,
                 title: Text(
                   _signupText,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: myButtonFontSize),
@@ -56,7 +56,7 @@ class MyAuthLayout extends StatelessWidget {
                 backColor: kcwhite54,
                 title: Text(
                   _signinText,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: kcPrimaryCascadeTwilight,
                       fontWeight: FontWeight.bold,
                       fontSize: myButtonFontSize),

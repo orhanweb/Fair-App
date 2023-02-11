@@ -3,7 +3,7 @@ import 'package:fair_app/Home/template_elements/camera_elements.dart';
 import 'package:fair_app/Home/template_elements/mic_elements.dart';
 import 'package:fair_app/Home/template_elements/multiple_answer.dart';
 import 'package:fair_app/Home/template_elements/text_field_elements.dart';
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';

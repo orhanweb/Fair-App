@@ -1,6 +1,6 @@
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/text_field_elements.dart';
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:fair_app/widgets/custom_buttons.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 

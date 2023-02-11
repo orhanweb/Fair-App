@@ -1,4 +1,4 @@
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:flutter/material.dart';
 
 class DesignedCard extends StatelessWidget {
@@ -32,7 +32,7 @@ class DesignedCard extends StatelessWidget {
             child: Center(
                 child: Text(
               titleName,
-              style: Theme.of(context).textTheme.headline6?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
                   ),

@@ -26,7 +26,7 @@ BorderSide myBorderSide = const BorderSide(
   color: kcPrimaryCascadeTwilight,
   style: BorderStyle.solid,
   width: 1.75,
-  strokeAlign: StrokeAlign.center,
+  strokeAlign: BorderSide.strokeAlignCenter,
 );
 
 //For Login Input Fields

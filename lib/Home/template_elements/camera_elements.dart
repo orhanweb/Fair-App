@@ -1,6 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:fair_app/Home/models/home_templates_cubit.dart';
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:fair_app/widgets/custom_fab.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:flutter/material.dart';
 
 Widget myfloatingActionButton(

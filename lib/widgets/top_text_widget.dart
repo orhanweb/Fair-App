@@ -1,4 +1,4 @@
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:flutter/material.dart';
 
 class TopTextWidget extends StatelessWidget {
@@ -15,7 +15,7 @@ class TopTextWidget extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       title,
-      style: Theme.of(context).textTheme.headline3?.copyWith(
+      style: Theme.of(context).textTheme.displaySmall?.copyWith(
             color: kcPrimaryCascadeTwilight,
             fontWeight: FontWeight.w500,
           ),

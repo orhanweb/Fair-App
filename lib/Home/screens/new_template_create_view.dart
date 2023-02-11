@@ -3,7 +3,7 @@ import 'package:fair_app/Home/models/home_templates_cubit.dart';
 import 'package:fair_app/Home/template_elements/camera_elements.dart';
 import 'package:fair_app/Home/template_elements/mic_elements.dart';
 import 'package:fair_app/Home/template_elements/multiple_answer.dart';
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:fair_app/widgets/custom_fab.dart';
 import 'package:fair_app/widgets/custom_my_snackbar.dart';
 import 'package:flutter/material.dart';
@@ -95,11 +95,11 @@ class MyTemplateNameWidget extends StatelessWidget {
         textAlign: TextAlign.center,
         controller: templateName,
         cursorColor: kcwhite,
-        style: Theme.of(context).textTheme.subtitle1?.copyWith(
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w500, fontSize: 18, color: kcwhite),
         decoration: InputDecoration(
             hintText: "Şablonun Adı",
-            hintStyle: Theme.of(context).textTheme.subtitle1?.copyWith(
+            hintStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: kcwhite54,
                   fontWeight: FontWeight.w400,
                   fontSize: 18,

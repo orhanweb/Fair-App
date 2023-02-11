@@ -18,6 +18,6 @@ void myCoolSnackBar(
       trailing: trailing,
       openDuration: const Duration(milliseconds: 1000),
       duration: const Duration(milliseconds: 2000),
-      titleStyle: textTheme?.subtitle1?.copyWith(fontWeight: FontWeight.bold),
-      descriptionStyle: textTheme?.subtitle2);
+      titleStyle: textTheme?.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+      descriptionStyle: textTheme?.titleSmall);
 }

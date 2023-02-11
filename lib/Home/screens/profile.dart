@@ -1,4 +1,4 @@
-import 'package:fair_app/shared/const.dart';
+import 'package:fair_app/Core/Constants/const.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
@@ -13,8 +13,10 @@ class Profile extends StatelessWidget {
       body: Center(
         child: Text(
           "Hoşgeldiniz $username",
-          style:
-              Theme.of(context).textTheme.headline5?.copyWith(color: kcblack54),
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(color: kcblack54),
         ),
       ),
     );
